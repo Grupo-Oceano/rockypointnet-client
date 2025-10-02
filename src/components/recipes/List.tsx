@@ -1,12 +1,9 @@
-'use client';
-
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import RecipesSearchBar from './Search';
 import RecipesCard from './Card';
-import { RecipeLight } from '@/types';
 import { RecipesDropdown } from './Dropdown';
-import { ClientConfig } from '@thebcms/client';
-import { RecipesPagination } from './Pagination';
+import type { RecipeLight } from '../../utils/recipe';
+import type { ClientConfig } from '@thebcms/client';
 
 interface Props {
     recipes: RecipeLight[];
@@ -18,14 +15,7 @@ const RecipesList: React.FC<Props> = ({ recipes, bcmsConfig }) => {
     const [popularValue, setPopularValue] = useState('');
     const [categoriesValue, setCategoriesValue] = useState('');
     const recipesListDOM = useRef<HTMLDivElement | null>(null);
-    const [paginationPage, setPaginationPage] = useState(1);
     const [recipesPerPage, setRecipesPerPage] = useState(8);
-
-    useEffect(() => {
-        if (recipesListDOM.current) {
-            recipesListDOM.current.scrollIntoView({ behavior: 'smooth' });
-        }
-    }, [paginationPage]);
 
     useEffect(() => {
         if (window.innerWidth >= 1024) {
@@ -87,14 +77,6 @@ const RecipesList: React.FC<Props> = ({ recipes, bcmsConfig }) => {
         );
     }, [searchValue, popularValue, categoriesValue, recipes]);
 
-    const totalPaginationPages = useMemo(() => {
-        return Math.ceil((filteredRecipes.length || 0) / recipesPerPage);
-    }, [filteredRecipes, recipesPerPage]);
-
-    const onPageChange = (num: number) => {
-        setPaginationPage(num);
-    };
-
     return (
         <div>
             <div className="relative z-10 grid grid-cols-2 gap-x-3 gap-y-[14px] mb-8 max-w-[608px] mx-auto lg:gap-6 lg:mb-24">
@@ -124,31 +106,19 @@ const RecipesList: React.FC<Props> = ({ recipes, bcmsConfig }) => {
                     ref={recipesListDOM}
                     className="grid grid-cols-2 gap-x-5 gap-y-8 lg:grid-cols-3 xl:gap-x-12 xl:gap-y-16"
                 >
-                    {filteredRecipes
-                        .slice(
-                            (paginationPage - 1) * recipesPerPage,
-                            (paginationPage - 1) * recipesPerPage +
-                                recipesPerPage,
-                        )
-                        .map((recipe, index) => (
-                            <RecipesCard
-                                key={recipe.slug + index}
-                                bcmsConfig={bcmsConfig}
-                                card={recipe}
-                            />
-                        ))}
+                    {filteredRecipes.map((recipe, index) => (
+                        <RecipesCard
+                            key={recipe.slug + index}
+                            bcmsConfig={bcmsConfig}
+                            card={recipe}
+                        />
+                    ))}
                 </div>
             ) : (
                 <div className="flex justify-center text-sm leading-none font-medium tracking-[-0.41px] text-appGray-500">
                     There are no recipes for the applied filters
                 </div>
             )}
-            <RecipesPagination
-                atPage={paginationPage}
-                pageCount={totalPaginationPages}
-                className="flex items-center justify-center gap-x-2 mt-6 lg:mt-10 lg:gap-x-4 xl:mt-[72px]"
-                onPageChange={(value) => onPageChange(value)}
-            />
         </div>
     );
 };

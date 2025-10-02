@@ -1,18 +1,22 @@
 import React from 'react';
-import ContentManager from '@/components/ContentManager';
-import Btn from '@/components/Btn';
-import ArrowIcon from '@/assets/icons/arrow-right.svg';
+import ArrowIcon from '../../assets/icons/arrow-right.svg?raw';
 import { BCMSImage } from '@thebcms/components-react';
-import { RecipeLight } from '@/types';
-import { PropMediaDataParsed, PropRichTextDataParsed } from '@thebcms/types';
 import RecipesSearchBar from '../recipes/Search';
-import { bcmsPublic } from '@/bcms-public';
+import type { RecipeLight } from '../../utils/recipe';
+import type {
+    PropMediaDataParsed,
+    PropRichTextDataParsed,
+} from '@thebcms/types';
+import ContentManager from '../ContentManager';
+import Btn from '../Btn';
+import type { ClientConfig } from '@thebcms/client';
 
 interface Props {
     headline: PropRichTextDataParsed;
     description: PropRichTextDataParsed;
     coverImage: PropMediaDataParsed;
     recipes: RecipeLight[];
+    bcmsConfig: ClientConfig;
 }
 
 const HomePageHero: React.FC<Props> = ({
@@ -20,6 +24,7 @@ const HomePageHero: React.FC<Props> = ({
     description,
     coverImage,
     recipes,
+    bcmsConfig,
 }) => {
     return (
         <section className="relative">
@@ -38,7 +43,10 @@ const HomePageHero: React.FC<Props> = ({
                         />
                         <Btn to="/recipes">
                             <span className="mr-2">Browse recipes</span>
-                            <ArrowIcon className="w-[14px] h-[14px] lg:w-5 lg:h-5" />
+                            <div
+                                dangerouslySetInnerHTML={{ __html: ArrowIcon }}
+                                className="w-[14px] h-[14px] lg:w-5 lg:h-5"
+                            />
                         </Btn>
                     </div>
                     <RecipesSearchBar
@@ -50,7 +58,7 @@ const HomePageHero: React.FC<Props> = ({
             <div className="absolute top-0 left-0 size-full">
                 <BCMSImage
                     media={coverImage}
-                    clientConfig={bcmsPublic.getConfig()}
+                    clientConfig={bcmsConfig}
                     className="size-full object-cover position-top"
                 />
                 <div className="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-[#1E1E1E] to-[#1E1E1E]/0" />

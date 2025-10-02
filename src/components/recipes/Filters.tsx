@@ -1,9 +1,6 @@
-'use client';
-
 import React, { useEffect, useState } from 'react';
-import RecipesSearchBar from '@/components/recipes/Search';
-import { RecipesDropdown } from '@/components/recipes/Dropdown';
-import { useRouter } from 'next/navigation';
+import RecipesSearchBar from './Search';
+import { RecipesDropdown } from './Dropdown';
 
 interface Props {
     popular: string[];
@@ -11,14 +8,13 @@ interface Props {
 }
 
 const Filters: React.FC<Props> = ({ popular, categories }) => {
-    const router = useRouter();
     const [searchValue, setSearchValue] = useState('');
     const [popularValue, setPopularValue] = useState('');
     const [categoriesValue, setCategoriesValue] = useState('');
 
     const filterRedirect = (key: string, val: string) => {
         if (val) {
-            void router.push(`/recipes/?${key}=${val}`);
+            window.location.href = `/recipes/?${key}=${val}`;
         }
     };
 

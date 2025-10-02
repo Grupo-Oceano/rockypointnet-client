@@ -1,13 +1,12 @@
 import React from 'react';
-import Link from 'next/link';
 import classnames from 'classnames';
-import Btn from '@/components/Btn';
-import ContentManager from '@/components/ContentManager';
-import ArrowIcon from '@/assets/icons/arrow-right.svg';
-import DownloadIcon from '@/assets/icons/download.svg';
-import { RecipeLight } from '@/types';
+import Btn from '../Btn';
+import ContentManager from '../ContentManager';
+import ArrowIcon from '../../assets/icons/arrow-right.svg?raw';
+import DownloadIcon from '../../assets/icons/download.svg?raw';
 import { BCMSImage } from '@thebcms/components-react';
-import { ClientConfig } from '@thebcms/client';
+import type { ClientConfig } from '@thebcms/client';
+import type { RecipeLight } from '../../utils/recipe';
 
 interface Props {
     card: RecipeLight;
@@ -18,7 +17,7 @@ interface Props {
 const RecipesCard: React.FC<Props> = ({ card, showTitleLayer, bcmsConfig }) => {
     return (
         <article>
-            <Link href={`/recipes/${card.slug}`} className="flex flex-col">
+            <a href={`/recipes/${card.slug}`} className="flex flex-col">
                 <div
                     className={classnames('relative', {
                         'lg:mb-[34px]': showTitleLayer,
@@ -104,7 +103,10 @@ const RecipesCard: React.FC<Props> = ({ card, showTitleLayer, bcmsConfig }) => {
                     <span className="text-left mr-2 max-lg:hidden">
                         Show ingredients and steps
                     </span>
-                    <ArrowIcon className="w-3 h-3 flex-shrink-0 lg:w-4 lg:h-4" />
+                    <div
+                        dangerouslySetInnerHTML={{ __html: ArrowIcon }}
+                        className="w-3 h-3 flex-shrink-0 lg:w-4 lg:h-4"
+                    />
                 </Btn>
                 <Btn
                     size="sm"
@@ -112,9 +114,12 @@ const RecipesCard: React.FC<Props> = ({ card, showTitleLayer, bcmsConfig }) => {
                     className="justify-center bg-transparent border-[#E8E8E8]/100 mb-2 lg:hidden"
                 >
                     <span className="text-left mr-1">Download recipe</span>
-                    <DownloadIcon className="w-3 h-3 flex-shrink-0" />
+                    <div
+                        dangerouslySetInnerHTML={{ __html: DownloadIcon }}
+                        className="w-3 h-3 flex-shrink-0"
+                    />
                 </Btn>
-            </Link>
+            </a>
         </article>
     );
 };

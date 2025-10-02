@@ -1,15 +1,14 @@
 import React from 'react';
-import { FooterEntryMetaItem } from '@bcms-types/types/ts';
 import { BCMSImage } from '@thebcms/components-react';
 import ContentManager from '../ContentManager';
-import Link from 'next/link';
-import { bcmsPublic } from '@/bcms-public';
+import type { FooterEntryMetaItem } from '../../../bcms/types/ts';
+import { bcmsPublic } from '../../bcms-public.ts';
 
 interface Props {
     footer: FooterEntryMetaItem;
 }
 
-const Footer: React.FC<Props> = async ({ footer }) => {
+const Footer: React.FC<Props> = ({ footer }) => {
     return (
         <footer className="bg-appGray-100 pt-6 pb-[35px] md:pb-8 lg:pt-14">
             <div className="container">
@@ -34,13 +33,13 @@ const Footer: React.FC<Props> = async ({ footer }) => {
                                 <div className="grid grid-cols-1 gap-[14px] lg:gap-4">
                                     {col.items.map((item, itemIndex) => {
                                         return (
-                                            <Link
+                                            <a
                                                 key={itemIndex}
                                                 href={item.link}
                                                 className="flex hover:underline focus-visible:underline text-sm leading-none font-medium tracking-[-0.41px] text-appAccent lg:text-[17px] lg:leading-none"
                                             >
                                                 {item.text}
-                                            </Link>
+                                            </a>
                                         );
                                     })}
                                 </div>
@@ -56,7 +55,6 @@ const Footer: React.FC<Props> = async ({ footer }) => {
                         className="flex items-center text-sm max-md:mb-3 lg:text-base lg:leading-none"
                     >
                         Powered by
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src="/logo-dark.png"
                             alt="BCMS Logo"

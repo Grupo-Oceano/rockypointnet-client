@@ -1,12 +1,10 @@
-'use client';
-
-import React, { useState, FormEvent } from 'react';
-import ContentManager from '@/components/ContentManager';
-import Phone from '@/assets/icons/phone.svg';
-import Email from '@/assets/icons/email.svg';
+import React, { useState, type FormEvent } from 'react';
+import Phone from '../../assets/icons/phone.svg?raw';
+import Email from '../../assets/icons/email.svg?raw';
 import classnames from 'classnames';
-import Btn from '@/components/Btn';
-import { PropRichTextDataParsed } from '@thebcms/types';
+import ContentManager from '../ContentManager';
+import Btn from '../Btn';
+import type { PropRichTextDataParsed } from '@thebcms/types';
 
 interface ContactForm {
     name: string;
@@ -84,7 +82,12 @@ const HomePageLetsTalk: React.FC<Props> = ({
                         <div className="grid grid-cols-1 gap-5 lg:gap-10">
                             <div className="flex flex-col items-center lg:items-start">
                                 <div className="flex items-center mb-2 lg:mb-4">
-                                    <Phone className="w-3 h-3 mr-1.5 lg:w-[18px] lg:h-[18px]" />
+                                    <div
+                                        dangerouslySetInnerHTML={{
+                                            __html: Phone,
+                                        }}
+                                        className="w-3 h-3 mr-1.5 lg:w-[18px] lg:h-[18px]"
+                                    />
                                     <div className="text-xs leading-none font-medium tracking-[-0.41px] text-appGray-500 lg:text-lg lg:leading-none">
                                         Telephone
                                     </div>
@@ -96,7 +99,12 @@ const HomePageLetsTalk: React.FC<Props> = ({
                             </div>
                             <div className="flex flex-col items-center lg:items-start">
                                 <div className="flex items-center mb-2 lg:mb-4">
-                                    <Email className="w-3 h-3 mr-1.5 lg:w-[18px] lg:h-[18px]" />
+                                    <div
+                                        dangerouslySetInnerHTML={{
+                                            __html: Email,
+                                        }}
+                                        className="w-3 h-3 mr-1.5 lg:w-[18px] lg:h-[18px]"
+                                    />
                                     <div className="text-xs leading-none font-medium tracking-[-0.41px] text-appGray-500 lg:text-lg lg:leading-none">
                                         Email
                                     </div>

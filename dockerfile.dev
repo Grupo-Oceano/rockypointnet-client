@@ -1,0 +1,45 @@
+##### BASE STAGE #####
+FROM node:lts-bookworm-slim AS base
+
+# Install linux dependencies
+RUN apt-get update && apt-get install -y \
+  wget curl iputils-ping ca-certificates \
+   procps tzdata openssh-client sshpass\
+  && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Install corepack
+RUN wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
+  # Enable pnpm
+  ENV PNPM_HOME="/pnpm"
+  ENV PATH="$PNPM_HOME:$PATH"
+  RUN corepack enable
+  RUN corepack install -g pnpm@latest
+  RUN corepack prepare pnpm@latest --activate
+
+# Install Astro globally
+RUN pnpm add -g astro@latest
+
+# Copy package.json and package-lock.json
+COPY package.json ./
+
+# Install dependencies
+RUN pnpm install
+
+##### DEV STAGE #####
+FROM base AS dev
+
+# Copy the rest of the application code
+COPY . .
+
+# Set correct timezone
+ENV TZ=America/Hermosillo
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# Set environment variables
+ENV NODE_ENV=development
+
+# Entrypoint, check if node_modules and prisma generated files exist, if not install dependencies and generate prisma client
+CMD ["/bin/sh", "-c", "[ ! -d node_modules ] && pnpm install; pnpm run dev"]

@@ -1,5 +1,20 @@
-import { RecipeLight } from '@/types';
-import { RecipeEntry, RecipeEntryMetaItem } from '@bcms-types/types/ts';
+import type {
+    RecipeEntry,
+    RecipeEntryMetaItem,
+} from '../../bcms/types/ts/entry/recipe';
+import type {
+    PropMediaDataParsed,
+    PropRichTextDataParsed,
+} from '@thebcms/types';
+
+export interface RecipeLight {
+    title: string;
+    slug: string;
+    cover?: PropMediaDataParsed;
+    description: PropRichTextDataParsed;
+    categories: string[];
+    popular?: boolean;
+}
 
 export const recipeToLight = (recipe: RecipeEntry): RecipeLight => {
     const meta = recipe.meta.en as RecipeEntryMetaItem;

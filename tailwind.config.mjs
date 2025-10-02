@@ -1,11 +1,6 @@
-import type { Config } from 'tailwindcss';
-
-const config: Config = {
-    content: [
-        './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-        './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-        './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    ],
+/** @type {import('tailwindcss').Config} */
+export default {
+    content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
     theme: {
         extend: {
             colors: {
@@ -25,6 +20,9 @@ const config: Config = {
                 },
                 appWarning: '#FC5E5E',
             },
+            fontFamily: {
+                inter: ['Inter', 'sans-serif'],
+            },
             container: {
                 center: true,
                 padding: {
@@ -43,4 +41,3 @@ const config: Config = {
     },
     plugins: [],
 };
-export default config;

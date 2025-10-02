@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
-import RecipesSearch from '@/components/recipes/Search';
-import { RecipeLight } from '@/types';
-import Btn from '@/components/Btn';
-import ArrowIcon from '@/assets/icons/arrow-right.svg';
-import { RecipeEntry, RecipeEntryMetaItem } from '@bcms-types/types/ts';
+import ArrowIcon from '../../assets/icons/arrow-right.svg?raw';
 import RecipesCard from '../recipes/Card';
-import { ClientConfig } from '@thebcms/client';
+import type { RecipeEntry, RecipeEntryMetaItem } from '../../../bcms/types/ts';
+import type { ClientConfig } from '@thebcms/client';
+import type { RecipeLight } from '../../utils/recipe';
+import RecipesSearchBar from '../recipes/Search';
+import Btn from '../Btn';
 
 interface Props {
     title: string;
@@ -34,7 +34,7 @@ const HomePageRecipes: React.FC<Props> = ({
     return (
         <section className="py-8 lg:py-20 xl:pt-[128px] xl:pb-[120px]">
             <div className="container">
-                <RecipesSearch
+                <RecipesSearchBar
                     recipes={recipes}
                     static
                     className="relative z-10 mb-8 lg:hidden"
@@ -54,7 +54,10 @@ const HomePageRecipes: React.FC<Props> = ({
                 <div className="flex justify-center">
                     <Btn to="/recipes" theme="dark">
                         <span className="mr-2">Browse more recipes</span>
-                        <ArrowIcon className="w-[14px] h-[14px] lg:w-5 lg:h-5" />
+                        <div
+                            dangerouslySetInnerHTML={{ __html: ArrowIcon }}
+                            className="w-[14px] h-[14px] lg:w-5 lg:h-5"
+                        />
                     </Btn>
                 </div>
             </div>

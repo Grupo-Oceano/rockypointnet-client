@@ -1,17 +1,14 @@
-'use client';
-
 import React, {
     useState,
-    ChangeEvent,
-    KeyboardEvent,
+    type ChangeEvent,
+    type KeyboardEvent,
     useMemo,
     useRef,
 } from 'react';
-import Link from 'next/link';
 import classNames from 'classnames';
-import SearchIcon from '@/assets/icons/search.svg';
+import SearchIcon from '../../assets/icons/search.svg?raw';
 import { Transition } from 'react-transition-group';
-import { RecipeLight } from '@/types';
+import type { RecipeLight } from '../../utils/recipe';
 
 interface Props {
     value?: string;
@@ -99,11 +96,13 @@ const RecipesSearchBar: React.FC<Props> = ({
                         : '',
                 }}
             >
-                <SearchIcon
+                <div
+                    dangerouslySetInnerHTML={{ __html: SearchIcon }}
                     className={classNames('w-5 h-5', {
                         'lg:w-6 lg:h-6': size === 'lg',
                     })}
                 />
+
                 <div className="relative">
                     <input
                         value={searchValue.toLowerCase()}
@@ -168,14 +167,14 @@ const RecipesSearchBar: React.FC<Props> = ({
                         >
                             {filteredRecipes.length > 0 ? (
                                 filteredRecipes.map((recipe, index) => (
-                                    <Link
+                                    <a
                                         key={index}
                                         href={`/recipes/${recipe.slug}`}
                                         onClick={() => setSearchValue('')}
                                         className="flex bg-white px-4 py-3 text-sm leading-none font-medium tracking-[-0.41px] text-appGray-500 transition-colors duration-300 hover:text-appAccent"
                                     >
                                         {recipe.title}
-                                    </Link>
+                                    </a>
                                 ))
                             ) : (
                                 <div className="flex bg-white px-4 py-3 text-sm leading-none font-medium tracking-[-0.41px] text-appGray-500">

@@ -1,25 +1,22 @@
-'use client';
-
 import React, { useEffect, useRef, useState } from 'react';
-import MenuIcon from '@/assets/icons/nav/menu.svg';
-import XIcon from '@/assets/icons/nav/x.svg';
-import Link from 'next/link';
+import MenuIcon from '../../assets/icons/nav/menu.svg?raw';
+import XIcon from '../../assets/icons/nav/x.svg?raw';
 import classNames from 'classnames';
-import { HeaderEntryMetaItem } from '@bcms-types/types/ts';
 import { BCMSImage } from '@thebcms/components-react';
-import { usePathname } from 'next/navigation';
-import { bcmsPublic } from '@/bcms-public';
+import type { HeaderEntryMetaItem } from '../../../bcms/types/ts';
+import { bcmsPublic } from '../../bcms-public.ts';
 
 interface Props {
     header: HeaderEntryMetaItem;
 }
 
 const Header: React.FC<Props> = ({ header }) => {
-    const pathname = usePathname();
+    const [pathname, setPathname] = useState('');
     const navItemsDOM = useRef<HTMLDivElement | null>(null);
     const [showMobileNav, setShowMobileNav] = useState(false);
 
     useEffect(() => {
+        setPathname(window.location.pathname);
         const handleMobileNavClickOutside = (event: MouseEvent) => {
             const navItemsEl = navItemsDOM.current;
 
@@ -45,7 +42,7 @@ const Header: React.FC<Props> = ({ header }) => {
                 <div className="container">
                     <div className="relative flex items-center justify-between py-[13px] max-md:justify-center md:py-4">
                         <div className="flex items-center">
-                            <Link
+                            <a
                                 href="/"
                                 className="flex max-md:absolute max-md:left-0 max-md:-bottom-[50px] md:mr-8"
                                 aria-label="Home page"
@@ -61,13 +58,13 @@ const Header: React.FC<Props> = ({ header }) => {
                                         },
                                     )}
                                 />
-                            </Link>
-                            <Link
+                            </a>
+                            <a
                                 href={header.nav[0].link}
                                 className="text-sm leading-none tracking-[-0.41px] text-appAccent-100 underline transition-colors duration-300 hover:text-white focus-visible:text-white"
                             >
                                 {header.nav[0].text}
-                            </Link>
+                            </a>
                         </div>
                         <button
                             className="flex items-center justify-center w-8 h-8 bg-white/70 rounded-full max-md:absolute max-md:right-0 max-md:-bottom-[54px] md:hidden"
@@ -75,9 +72,17 @@ const Header: React.FC<Props> = ({ header }) => {
                             onClick={() => setShowMobileNav((prev) => !prev)}
                         >
                             {showMobileNav ? (
-                                <XIcon className="flex w-[18px] h-[18px] text-appAccent" />
+                                <div
+                                    dangerouslySetInnerHTML={{ __html: XIcon }}
+                                    className="flex w-[18px] h-[18px] text-appAccent"
+                                />
                             ) : (
-                                <MenuIcon className="flex w-[18px] h-[18px]" />
+                                <div
+                                    dangerouslySetInnerHTML={{
+                                        __html: MenuIcon,
+                                    }}
+                                    className="flex w-[18px] h-[18px]"
+                                />
                             )}
                         </button>
                         <div
@@ -92,13 +97,13 @@ const Header: React.FC<Props> = ({ header }) => {
                             )}
                         >
                             {header.nav.slice(1).map((navItem, index) => (
-                                <Link
+                                <a
                                     key={index}
                                     href={navItem.link}
                                     className="text-sm leading-none tracking-[-0.41px] text-appAccent/70 font-medium transition-colors duration-300 hover:text-appAccent focus-visible:text-appAccent md:text-appAccent-100 md:hover:text-white md:focus-visible:text-white"
                                 >
                                     {navItem.text}
-                                </Link>
+                                </a>
                             ))}
                         </div>
                     </div>

@@ -1,6 +1,5 @@
 import classNames from 'classnames';
-import Link from 'next/link';
-import React, { PropsWithChildren } from 'react';
+import React, { type PropsWithChildren } from 'react';
 
 type Theme = 'light' | 'dark' | 'gray';
 type Size = 'sm' | 'regular';
@@ -42,9 +41,9 @@ const Btn: React.FC<BtnProps> = ({
     return (
         <>
             {to ? (
-                <Link href={to as string} className={classes}>
+                <a href={to} className={classes}>
                     {children}
-                </Link>
+                </a>
             ) : (
                 <button
                     onClick={onClick}

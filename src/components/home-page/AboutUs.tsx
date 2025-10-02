@@ -1,14 +1,15 @@
 import React from 'react';
-import ContentManager from '@/components/ContentManager';
-import { HomeAboutUsGroup } from '@bcms-types/types/ts';
+import type { HomeAboutUsGroup } from '../../../bcms/types/ts';
+import ContentManager from '../ContentManager';
 import { BCMSImage } from '@thebcms/components-react';
-import { bcmsPublic } from '@/bcms-public';
+import type { ClientConfig } from '@thebcms/client';
 
 interface Props {
     data: HomeAboutUsGroup;
+    bcmsConfig: ClientConfig;
 }
 
-const HomePageAboutUs: React.FC<Props> = ({ data }) => {
+const HomePageAboutUs: React.FC<Props> = ({ data, bcmsConfig }) => {
     return (
         <section className="relative pb-8 lg:pb-20 xl:pb-[120px]">
             <div className="container">
@@ -40,7 +41,7 @@ const HomePageAboutUs: React.FC<Props> = ({ data }) => {
                     <div className="absolute top-0 left-0 size-full">
                         <BCMSImage
                             media={data.cover_image}
-                            clientConfig={bcmsPublic.getConfig()}
+                            clientConfig={bcmsConfig}
                             className=" size-full object-cover"
                         />
                     </div>

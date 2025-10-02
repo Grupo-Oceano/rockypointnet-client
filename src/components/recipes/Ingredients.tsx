@@ -1,6 +1,6 @@
-import ContentManager from '@/components/ContentManager';
-import { PropRichTextDataParsed } from '@thebcms/types';
+import type { PropRichTextDataParsed } from '@thebcms/types';
 import React from 'react';
+import ContentManager from '../ContentManager';
 
 interface Props {
     ingredients: PropRichTextDataParsed[];

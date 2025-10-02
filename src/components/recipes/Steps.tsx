@@ -1,13 +1,11 @@
-'use client';
-
 import React, { useState } from 'react';
 import classnames from 'classnames';
-import { RecipeStepGroup } from '@bcms-types/types/ts';
 import { BCMSImage } from '@thebcms/components-react';
-import { ClientConfig } from '@thebcms/client';
-import ContentManager from '@/components/ContentManager';
-import ArrowIcon from '@/assets/icons/arrow-right.svg';
-import Btn from '@/components/Btn';
+import ArrowIcon from '../../assets/icons/arrow-right.svg?raw';
+import type { RecipeStepGroup } from '../../../bcms/types/ts';
+import type { ClientConfig } from '@thebcms/client';
+import ContentManager from '../ContentManager';
+import Btn from '../Btn';
 
 interface Props {
     steps: RecipeStepGroup[];
@@ -69,7 +67,10 @@ export const Steps: React.FC<Props> = ({ steps, bcmsConfig }) => {
                     className="justify-center"
                     onClick={() => setActiveStep((prev) => prev - 1)}
                 >
-                    <ArrowIcon className="w-[14px] h-[14px] mr-2 rotate-180 lg:w-5 lg:h-5" />
+                    <div
+                        dangerouslySetInnerHTML={{ __html: ArrowIcon }}
+                        className="w-[14px] h-[14px] mr-2 rotate-180 lg:w-5 lg:h-5"
+                    />
                     <span>Previous</span>
                 </Btn>
                 <Btn
@@ -79,7 +80,10 @@ export const Steps: React.FC<Props> = ({ steps, bcmsConfig }) => {
                     onClick={() => setActiveStep((prev) => prev + 1)}
                 >
                     <span className="mr-2">Next</span>
-                    <ArrowIcon className="w-[14px] h-[14px] lg:w-5 lg:h-5" />
+                    <div
+                        dangerouslySetInnerHTML={{ __html: ArrowIcon }}
+                        className="w-[14px] h-[14px] lg:w-5 lg:h-5"
+                    />
                 </Btn>
             </div>
         </div>

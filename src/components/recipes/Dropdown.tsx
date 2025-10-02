@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import classnames from 'classnames';
-import ChevronIcon from '@/assets/icons/chevron-down.svg';
-import ArrowIcon from '@/assets/icons/arrow-right.svg';
-import { useClickOutside } from '@/hooks/useClickOutside';
+import ChevronIcon from '../../assets/icons/chevron-down.svg?raw';
+import ArrowIcon from '../../assets/icons/arrow-right.svg?raw';
+import { useClickOutside } from '../../hooks/useClickOutside';
 import { Transition } from 'react-transition-group';
 
 interface Props {
@@ -58,7 +58,8 @@ export const RecipesDropdown: React.FC<Props> = ({
                 >
                     {value || placeholder}
                 </span>
-                <ChevronIcon
+                <div
+                    dangerouslySetInnerHTML={{ __html: ChevronIcon }}
                     className={classnames(
                         'w-[14px] h-[14px] transition-transform duration-300 lg:w-4 lg:h-4',
                         {
@@ -110,7 +111,12 @@ export const RecipesDropdown: React.FC<Props> = ({
                                         <span className="relative z-10 transition-colors duration-300 group-hover:text-appGray-400 lg:group-hover:text-white">
                                             {option}
                                         </span>
-                                        <ArrowIcon className="absolute top-1/2 -translate-y-1/2 -right-2.5 -translate-x-2 w-5 h-5 opacity-0 transition-all duration-300 text-white group-hover:opacity-100 group-hover:translate-x-1 max-lg:hidden" />
+                                        <div
+                                            dangerouslySetInnerHTML={{
+                                                __html: ArrowIcon,
+                                            }}
+                                            className="absolute top-1/2 -translate-y-1/2 -right-2.5 -translate-x-2 w-5 h-5 opacity-0 transition-all duration-300 text-white group-hover:opacity-100 group-hover:translate-x-1 max-lg:hidden"
+                                        />
                                     </button>
                                 ))}
                             </div>

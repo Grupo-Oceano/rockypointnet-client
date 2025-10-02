@@ -1,10 +1,8 @@
-'use client';
-
 import React, { useState } from 'react';
 import classnames from 'classnames';
-import { QaItemGroup } from '@bcms-types/types/ts';
-import ChevronIcon from '@/assets/icons/chevron-down.svg';
-import ContentManager from '@/components/ContentManager';
+import ChevronIcon from '../../assets/icons/chevron-down.svg?raw';
+import type { QaItemGroup } from '../../../bcms/types/ts';
+import ContentManager from '../ContentManager';
 
 interface Props {
     item: QaItemGroup;
@@ -22,7 +20,8 @@ export const QAItem: React.FC<Props> = ({ item }) => {
                 <span className="text-xs leading-none font-semibold text-appGray-700 tracking-[-0.41px] lg:text-base lg:leading-none">
                     {item.question}
                 </span>
-                <ChevronIcon
+                <div
+                    dangerouslySetInnerHTML={{ __html: ChevronIcon }}
                     className={classnames(
                         'w-4 h-4 transition-transform duration-300',
                         {
