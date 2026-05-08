@@ -1,0 +1,79 @@
+# Trivy: https://github.com/aquasecurity/trivy-action
+# Next.js + Bun app: fs scan (package.json / bun.lock) + Docker image scan (Debian + runtime).
+# Runs only on a schedule (default branch). Adjust cron as needed.
+
+name: Security (Trivy)
+
+on:
+  schedule:
+    # Mondays 06:00 UTC — change frequency (e.g. daily: "0 6 * * *")
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  trivy-filesystem:
+    name: Trivy — filesystem (deps & lockfile)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner (fs)
+        uses: aquasecurity/trivy-action@0.36.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          severity: CRITICAL,HIGH
+          vuln-type: os,library
+          ignore-unfixed: true
+          format: sarif
+          output: trivy-fs.sarif
+          # Non-zero when findings match severity; SARIF is still written before exit.
+          exit-code: "1"
+          skip-dirs: node_modules,.next,dist,coverage,.turbo,.git
+          scanners: vuln
+
+      - name: Upload Trivy fs results to GitHub Code Scanning
+        if: always()
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: trivy-fs.sarif
+          category: trivy-fs
+
+  trivy-image:
+    name: Trivy — production Docker image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build production image
+        run: docker build -t oceano-rentals:${{ github.sha }} --target production .
+
+      - name: Run Trivy vulnerability scanner (image)
+        uses: aquasecurity/trivy-action@0.36.0
+        with:
+          scan-type: image
+          image-ref: oceano-rentals:${{ github.sha }}
+          severity: CRITICAL,HIGH
+          vuln-type: os,library
+          ignore-unfixed: true
+          format: sarif
+          output: trivy-image.sarif
+          exit-code: "1"
+
+      - name: Upload Trivy image results to GitHub Code Scanning
+        if: always()
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: trivy-image.sarif
+          category: trivy-docker

@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "@qwik.dev/core",
     "types": ["astro"]
   },
   "extends": "astro/tsconfigs/strict",

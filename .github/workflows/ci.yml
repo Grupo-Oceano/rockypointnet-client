@@ -1,0 +1,37 @@
+# Single workflow: one install, lint then test then build (matches pre-commit + pre-push).
+# More efficient than 3 separate workflows (1 runner, 1 install instead of 3).
+
+name: Continuous Integration (Lint, Test, Build)
+
+on:
+  pull_request:
+    branches: [main, dev]
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+jobs:
+  continuous-integration:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Check formatting (Prettier)
+        run: bun run format:check
+
+      - name: Run ESLint
+        run: bun run lint
+
+      - name: Run tests
+        run: bun run test
+
+      - name: Build
+        run: bun run build
