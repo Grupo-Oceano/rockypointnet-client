@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "PORT=8080 bun ./dist/server/index.mjs",
+    "preview": "astro preview --port 8080",
     "astro": "astro"
   },
   "dependencies": {

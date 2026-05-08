@@ -10,6 +10,10 @@ export default defineConfig({
   adapter: node({
     mode: "standalone",
   }),
+  build: {
+    serverEntry: "index.mjs",
+    server: './server/index.mjs',
+  },
   prefetch: true,
   integrations: [
     // https://astro.qwik.dev/docs
