@@ -12,15 +12,41 @@
     "astro": "astro",
     "lint": "eslint --max-warnings=0",
     "lint:fix": "eslint --fix --max-warnings=0",
-    "format:fix": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,md}\""
+    "format:fix": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,md,astro}\"",
+    "prepare": "husky"
   },
   "dependencies": {
     "@astrojs/node": "^10.1.0",
+    "@lucide/astro": "^1.14.0",
     "@qwik.dev/astro": "^1.0.2",
     "@qwik.dev/core": "^2.0.0-beta.34",
     "@tailwindcss/vite": "^4.2.4",
     "astro": "^6.3.1",
     "motion": "^12.38.0",
     "tailwindcss": "^4.2.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "clsx": "^2.1.1",
+    "eslint": "^10.3.0",
+    "eslint-plugin-astro": "^1.7.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prettier": "^5.5.5",
+    "globals": "^17.6.0",
+    "husky": "^9.1.7",
+    "prettier": "^3.8.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.8.0",
+    "tailwind-merge": "^3.6.0",
+    "typescript-eslint": "^8.59.3"
+  },
+  "lint-staged": {
+    "./src/**/*.{js,jsx,ts,tsx,astro}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "./src/**/*.{json,md}": [
+      "prettier --write"
+    ]
   }
 }

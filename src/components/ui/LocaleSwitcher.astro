@@ -1,0 +1,59 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getDictionary, resolveLocale, SUPPORTED_LOCALES, type Locale } from "../../locales";
+
+const { className } = Astro.props;
+
+const locale = resolveLocale(Astro.currentLocale);
+const dict = getDictionary(locale);
+
+function stripLocalePrefix(pathname: string): string {
+	for (const code of SUPPORTED_LOCALES) {
+		if (pathname === `/${code}`) return "/";
+		if (pathname.startsWith(`/${code}/`)) return pathname.slice(code.length + 1);
+	}
+	return pathname;
+}
+
+const canonicalPath = stripLocalePrefix(Astro.url.pathname);
+
+const links: { code: Locale; label: string; ariaLabel: string }[] = [
+	{
+		code: "es",
+		label: dict.common.spanishLabel,
+		ariaLabel: dict.common.switchToSpanishAria,
+	},
+	{
+		code: "en",
+		label: dict.common.englishLabel,
+		ariaLabel: dict.common.switchToEnglishAria,
+	},
+];
+---
+
+<div class={className}>
+	<div
+		class="border-sand-200 ml-1 flex w-fit items-center gap-1 rounded-full border bg-white px-1 py-0.5 text-xs font-semibold"
+		role="group"
+		aria-label={dict.common.languageMenuLabel}
+	>
+		{
+			links.map((link) => {
+				const isActive = link.code === locale;
+				return (
+					<a
+						href={getRelativeLocaleUrl(link.code, canonicalPath)}
+						aria-label={link.ariaLabel}
+						aria-current={isActive ? "true" : undefined}
+						class:list={[
+							"rounded-full px-2 py-1 transition-colors",
+							isActive ? "bg-ocean-600 text-white" : "text-emperor-600 hover:bg-sand-100 hover:text-emperor-900",
+						]}
+					>
+						{link.code.toUpperCase()}
+					</a>
+				);
+			})
+		}
+	</div>
+</div>

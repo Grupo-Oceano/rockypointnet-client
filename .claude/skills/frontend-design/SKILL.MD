@@ -10,7 +10,7 @@ This skill encodes the **rockypointnet.com** design system. The goal is **consis
 ## Stack & conventions (binding)
 
 - **Astro 6** for pages, layouts, and non-interactive markup → `*.astro` in `src/components/[module]/`
-- **Qwik islands** (`@qwik.dev/astro`) for any interactivity, state, or client effects → `*.tsx` in `src/components/[module]/qwik/`, **default export**
+- **Qwik islands** (`@qwik.dev/astro`) for any interactivity, state, or client effects → `*.tsx` in `src/components/qwik/[module]/ComponentName.tsx`, **default export**
 - **Tailwind v4** via `@tailwindcss/vite`. Tokens live in `@theme` in [src/styles/global.css](../../../src/styles/global.css). Use token utilities (`bg-ocean-600`, `text-navy-800`) — do not hard-code hex.
 - **Motion** (`motion` v12) for animation in Qwik islands. Plain CSS transitions for Astro-only markup.
 - **TypeScript strict**. Tests sit next to source (`foo.ts` → `foo.test.ts`).

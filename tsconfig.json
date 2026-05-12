@@ -1,13 +1,19 @@
 {
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "@qwik.dev/core",
-    "types": ["astro"],
-    "paths": {
-      "@assets/*": ["./src/assets/*"]
-    }
-  },
-  "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"]
+	"compilerOptions": {
+		"jsx": "react-jsx",
+		"jsxImportSource": "@qwik.dev/core",
+		"types": ["astro"],
+		"paths": {
+			"@icons": ["./src/components/ui/icons"],
+			"@assets/*": ["./src/assets/*"],
+			"@components/*": ["./src/components/*"],
+			"@layouts/*": ["./src/layouts/*"],
+			"@utils/*": ["./src/utils/*"],
+
+			"@locales": ["./src/locales/index"]
+		}
+	},
+	"extends": "astro/tsconfigs/strict",
+	"include": [".astro/types.d.ts", "**/*"],
+	"exclude": ["dist"]
 }

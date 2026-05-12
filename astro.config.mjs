@@ -21,17 +21,26 @@ export default defineConfig({
     // See https://astro.qwik.dev/docs/upgrade for more details.
     qwik({ clientRouter: true }),
   ],
+  server: {
+    allowedHosts: ["localhost", "ngrok-free.app"], // Allow ngrok domains for development
+  },
   vite: {
     plugins: [tailwindcss()],
     ssr: {
       noExternal: ["@qwik.dev/astro"], // Ensure @qwik.dev/astro is bundled for SSR
     },
+    server: {
+      allowedHosts: ["localhost", "86f9-2806-101e-10-9b70-dd87-a35f-91ca-df02.ngrok-free.app"], // Allow ngrok domains for development
+    }
   },
   i18n: {
-    locales: ["es", "en"],
+    locales: ["en", "es"],
     defaultLocale: "en",
     fallback: {
       es: "en",
     },
   },
+  devToolbar: {
+    enabled: true,
+  }
 });
