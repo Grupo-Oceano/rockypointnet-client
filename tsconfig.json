@@ -2,7 +2,10 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "@qwik.dev/core",
-    "types": ["astro"]
+    "types": ["astro"],
+    "paths": {
+      "@assets/*": ["./src/assets/*"]
+    }
   },
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],

@@ -11,7 +11,7 @@ export default defineConfig({
     mode: "standalone",
   }),
   build: {
-    serverEntry: "index.mjs",
+    serverEntry: "server.mjs",
     server: './server/index.mjs',
   },
   prefetch: true,
@@ -24,7 +24,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     ssr: {
-      noExternal: ["@qwik.dev/astro"],
+      noExternal: ["@qwik.dev/astro"], // Ensure @qwik.dev/astro is bundled for SSR
     },
   },
   i18n: {
