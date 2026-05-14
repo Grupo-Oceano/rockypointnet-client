@@ -1,69 +1,105 @@
-# syntax=docker/dockerfile:1.7
+# -----------------------------------------------------------------------------
+# This Dockerfile.bun is specifically configured for projects using Bun
+# For npm/pnpm or yarn, refer to the Dockerfile instead
+# -----------------------------------------------------------------------------
 
-ARG BUN_VERSION=1.3-alpine
-
-# ---------------- Base ----------------
-FROM oven/bun:${BUN_VERSION} AS base
+# Pin to a specific Bun version — never use :latest in production
+FROM oven/bun:1.2.8-debian AS base
 
 WORKDIR /app
 
-ENV TZ=America/Hermosillo
-RUN apk add --no-cache tzdata curl ca-certificates \
-    && cp /usr/share/zoneinfo/$TZ /etc/localtime \
-    && echo $TZ > /etc/timezone
+# Install curl for health checks (Coolify)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
-# ---------------- Dependencies (full, for build & dev) ----------------
+# Install dependencies with bun
 FROM base AS deps
+COPY package.json bun.lock* ./
+RUN bun install --no-save --frozen-lockfile
 
-COPY package.json bun.lock ./
-RUN --mount=type=cache,target=/root/.bun/install/cache,sharing=locked \
-    bun install --frozen-lockfile
+# Rebuild the source code only when needed
+FROM base AS builder
 
-# ---------------- Builder ----------------
-FROM deps AS builder
-
-ENV NODE_ENV=production
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
+# Build-time args — Next.js inlines NEXT_PUBLIC_* at build time.
+ARG API_URL=http://server:3000
+ARG NEXT_PUBLIC_APP_ENV=production
+ARG NEXT_PUBLIC_SITE_URL=http://localhost
+ARG NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=
+ARG NEXT_PUBLIC_DEFAULT_MAPX=
+ARG NEXT_PUBLIC_DEFAULT_MAPY=
+ARG NEXT_PUBLIC_GA_MEASUREMENT_ID=
+ARG NEXT_PUBLIC_TWAKTO_PROPERTY_ID=
+ARG NEXT_PUBLIC_TWAKTO_WIDGET_ID=
+
+ENV API_URL=${API_URL}
+ENV NEXT_PUBLIC_APP_ENV=${NEXT_PUBLIC_APP_ENV}
+ENV NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
+ENV NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=${NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+ENV NEXT_PUBLIC_DEFAULT_MAPX=${NEXT_PUBLIC_DEFAULT_MAPX}
+ENV NEXT_PUBLIC_DEFAULT_MAPY=${NEXT_PUBLIC_DEFAULT_MAPY}
+ENV NEXT_PUBLIC_GA_MEASUREMENT_ID=${NEXT_PUBLIC_GA_MEASUREMENT_ID}
+ENV NEXT_PUBLIC_TWAKTO_PROPERTY_ID=${NEXT_PUBLIC_TWAKTO_PROPERTY_ID}
+ENV NEXT_PUBLIC_TWAKTO_WIDGET_ID=${NEXT_PUBLIC_TWAKTO_WIDGET_ID}
+
+# Next.js collects completely anonymous telemetry data about general usage.
+# Learn more here: https://nextjs.org/telemetry
+# Uncomment the following line in case you want to disable telemetry during the build.
+# ENV NEXT_TELEMETRY_DISABLED=1
+
 RUN bun run build
 
-# ---------------- Development ----------------
-FROM deps AS development
-
-ENV NODE_ENV=development \
-    CI=true \
-    HOST=0.0.0.0 \
-    PORT=4321
-
+# -----------------------------------------------------------------------------
+# Development phase — curl/ping only here, never in production
+# -----------------------------------------------------------------------------
+FROM base AS development
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+RUN bun add -g --no-save --frozen-lockfile next
+CMD ["/bin/sh", "-c", "[ ! -f node_modules/next/package.json ] && bun install --frozen-lockfile; bun run dev"]
 
-EXPOSE 4321
-HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-    CMD curl -fsS "http://localhost:${PORT}/api/health" || exit 1
-
-CMD ["/bin/sh", "-c", "[ ! -d node_modules ] && bun install; bun run dev -- --host"]
-
-# ---------------- Production dependencies (no dev deps) ----------------
-FROM base AS prod-deps
-
-COPY package.json bun.lock ./
-RUN --mount=type=cache,target=/root/.bun/install/cache,sharing=locked \
-    bun install --frozen-lockfile --production
-
-# ---------------- Production ----------------
+# -----------------------------------------------------------------------------
+# Production phase ---> We put it at the end of the file so its the default phase when the container is run
+# -----------------------------------------------------------------------------
 FROM base AS production
+WORKDIR /app
+
+# Uncomment the following line in case you want to disable telemetry during runtime.
+# ENV NEXT_TELEMETRY_DISABLED=1
 
 ENV NODE_ENV=production \
-    HOST=0.0.0.0 \
-    PORT=4321
+    PORT=3000 \
+    HOSTNAME="0.0.0.0"
 
-USER bun
+# Make sure Next.js is installed
+RUN if [ ! -f /app/node_modules/.bin/next ]; then \
+    bun install next --save-dev; \
+    fi
 
-COPY --from=prod-deps --chown=bun:bun /app/node_modules ./node_modules
-COPY --from=builder  --chown=bun:bun /app/dist          ./dist
-COPY --from=builder  --chown=bun:bun /app/package.json  ./package.json
+RUN if command -v addgroup >/dev/null 2>&1; then \
+    addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nextjs; \
+    else \
+    groupadd --system --gid 1001 nodejs && \
+    useradd --system --uid 1001 --gid 1001 nextjs; \
+    fi
 
-EXPOSE 4321
-HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-    CMD curl -fsS "http://localhost:${PORT}/api/health" || exit 1
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 
-CMD ["bun", "./dist/server/index.mjs"]
+# Automatically leverage output traces to reduce image size
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+# Copy next.config.ts
+COPY --from=builder --chown=nextjs:nodejs /app/next.config.ts ./next.config.ts
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
+EXPOSE 3000
+
+CMD ["bun", "run", "start"]

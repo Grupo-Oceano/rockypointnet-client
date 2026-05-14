@@ -2,57 +2,111 @@
 
 ## Commands
 
+- Dev: `bun run dev`
 - Build: `bun run build`
-- Test: `bun test`
 - Lint: `bun run lint`
+- Test: `bun test` (no suite yet — colocate tests as `foo.ts` → `foo.test.ts`)
 
 ## Stack
 
-- TypeScript with strict mode
-- Astro 6 with embedded Qwik islands for reactivity
-- Internet face of the app Astro + Qwik Containers (Islands) | Admin face Qwik Embedded app
+- TypeScript strict mode
+- Next.js 16 (App Router) with React 19, Turbopack
+- React Server Components by default; `"use client"` only when the file needs state, effects, or browser APIs
+- Tailwind v4 via `@tailwindcss/postcss`. Tokens in [app/globals.css](../app/globals.css) `@theme` block
+- **This is NOT the Next.js you know** — Next 16 has breaking changes (notably Middleware → Proxy, async `params`, `app/[lang]/layout.tsx` as the root layout). Read the relevant guide in `node_modules/next/dist/docs/` before writing new file-convention code. See [AGENTS.md](../AGENTS.md).
 
-## Rules
+## File structure
 
-- Qwik components lives in ./src/components/[modules or feature]/qwik
-- Astro compoents lives directly in ./src/components/[modules or feature]/\*.astro
-- Default exports for qwik components (\*.tsx)
-- Tests live next to source: `foo.ts` -> `foo.test.ts`
+- `app/` — **routes only**. No reusable components live here.
+  - `app/[lang]/layout.tsx` is the **root layout** (defines `<html>` and `<body>`); there is no `app/layout.tsx`.
+  - `app/[lang]/...` — locale-scoped pages and nested layouts.
+  - `app/api/*/route.ts` — route handlers (Web `Request`/`Response`; named HTTP-method exports).
+- `src/components/[feature]/` — feature-grouped components (`landing/`, `ui/`). **Default exports.**
+- `src/lib/` — shared utilities (`utils.ts` for `cn`, `routes.ts` for `localeUrl`, `images.ts` for `resolveImageSrc`).
+- `src/locales/` — typed dictionaries (`en.ts` source of truth, `es.ts` typed against it, `index.ts` for helpers).
+- `src/constants/` — typed data registries (modules, search tabs).
+- `public/` — static assets served at the root path.
+- `proxy.ts` — Next 16 renamed Middleware → Proxy. Locale-redirect logic lives here.
+
+## Path aliases (tsconfig.json)
+
+- `@/*` → repo root (use as `@/src/...` from inside `app/`)
+- `@components/*` → `src/components/*`
+- `@lib/*` → `src/lib/*`
+- `@locales` → `src/locales/index.ts`
+- `@locales/*` → `src/locales/*`
+
+## Server vs Client components
+
+Default to **Server Components** (RSC). Mark `"use client"` only when the file needs:
+
+- React state (`useState`, `useReducer`) or refs (`useRef`)
+- Effects (`useEffect`, `useLayoutEffect`) or browser APIs (`window`, `document`, `IntersectionObserver`, etc.)
+- Event handlers wired directly in JSX (`onClick`, `onSubmit`)
+
+Push `"use client"` to the smallest leaf possible — a single interactive control or section, not a whole page. Server components can render client components freely; the inverse requires `children` prop.
+
+Notes that **do not** apply here (carryover from the Astro+Qwik version of this app):
+
+- There is no Qwik-style serialization constraint. Dictionary entries can be functions (`(year) => \`© ${year}\``) and used freely in RSC or client components.
+- There is no Astro ↔ Qwik boundary. Everything is React.
 
 ## Internationalization
 
 ### Config
 
-- Locales `en`, `es`. Default `en`. Fallback `es → en` (see [astro.config.mjs](../astro.config.mjs)).
-- Use Astro's built-in i18n routing — no third-party routing libs.
-- Locale switches always trigger a full navigation. Build URLs with `getRelativeLocaleUrl` / `getAbsoluteLocaleUrl` from `astro:i18n`; never concatenate the locale prefix by hand.
-- Set `<html lang={Astro.currentLocale}>` in the root layout.
+- Locales `en`, `es`. Default `en`.
+- Routing: `app/[lang]/...` with `generateStaticParams` returning both locales. Both locales are URL-prefixed (`/en`, `/es`).
+- Unprefixed paths (`/`, `/hotels`) are redirected by [proxy.ts](../proxy.ts) using `Accept-Language`, falling back to `en`.
+- The `[lang]` root layout sets `<html lang={lang}>` dynamically.
 
-### Translation storage
+### Dictionaries
 
-- Typed TS dictionaries under [src/locales/](../src/locales/). `en.ts` is the source of truth for keys; `es.ts` must match its shape (derive `es.ts`'s type from `en.ts` so missing keys fail typecheck).
+- Typed TS dictionaries under [src/locales/](../src/locales/). `en.ts` is the source of truth for keys; `es.ts` is typed as `Dictionary` so TS fails if keys diverge.
+- Helpers in `src/locales/index.ts`: `getDictionary(locale)`, `resolveLocale(value)`, `hasLocale(value)`, `SUPPORTED_LOCALES`, `DEFAULT_LOCALE`.
 - When a file grows, split per feature: `src/locales/{lang}/{landing,search,...}.ts`, re-exported from `src/locales/{lang}/index.ts`.
-- No per-component co-located strings — keep coverage auditable.
-- Expose a `getDictionary(locale)` helper for Astro consumers.
 
-### Astro ↔ Qwik boundary
+### Pages & layouts narrow the locale
 
-**Astro resolves locale. Qwik islands receive `locale` as a prop and import their own dictionary slice. Strings are never passed as bulk props.**
+`params.lang` is typed as `string`. Every page/layout must:
 
-- **Static / display content** (top nav, footer, hero copy, card body markup): render in Astro and look up strings server-side via `getDictionary(Astro.currentLocale)`. Do not serialize these into a Qwik island.
-- **Interactive islands** (search bar, filter aside, sort dropdown, paginator, autocomplete): accept `locale: "en" | "es"` as a prop and statically import only the dictionary slice they need from `src/locales/{lang}/<feature>.ts`. The slice ships inside the island bundle so post-hydration strings ("Loading…", "No results for {query}", error states) resolve without extra fetches.
-- **Result cards on search/results pages**: render the card shell in Astro for SSR. Only escalate sub-elements (favorite toggle, hover menu) to small Qwik islands when interactivity is required, and pass `locale` plus the minimal needed strings as props.
-- **Search/results page composition**: the Astro page resolves locale once, mounts interactive controls (top search, aside filters, sort) as Qwik islands each receiving the `locale` prop, and SSRs the result cards. Filter or sort changes that produce new results trigger full navigation with updated query params — never client-side string swaps.
-- **Dictionary slices consumed by Qwik must be primitive-only.** Qwik's resumability serializes the component closure; any function captured from a dictionary (e.g. `(name) => `por ${name}``) crashes SSR with `Code(Q34): Serialization Error: Cannot serialize function`. Lint and build pass — only SSR catches it. Keep template-functions scoped to Astro-only slices (e.g. `events.card.byOrganizer`, `footer.copyright`). For Qwik slices, expose a primitive prefix (e.g. `decrementAriaPrefix: "Disminuir"`) and concatenate at the call site (`aria-label={`${prefix} ${label.toLowerCase()}`}`).
+```ts
+const { lang } = await params;
+if (!hasLocale(lang)) notFound();
+```
+
+before calling `getDictionary(lang)`. This both narrows the type and returns a real 404 for unsupported locales rather than letting an invalid locale silently fall back.
 
 ### Locale-aware formatting
 
-- Always format dates, numbers, and currency with `Intl.*` using the resolved locale. Never hardcode formats or month names.
-- Inside Qwik, derive formatters from the `locale` prop.
+- Always format dates, numbers, currency with `Intl.*` using the resolved locale.
+- Inside client components, accept `locale` as a prop and derive formatters from it.
 
 ### Adding a translatable string
 
 1. Add the key to `en.ts` (source of truth).
 2. Add the Spanish value to `es.ts` — TypeScript will fail until the key is present.
-3. Read via `getDictionary(locale).<feature>.<key>` in Astro, or from the statically imported slice in Qwik.
-4. Do not rely on the `es → en` fallback for shipped pages; fill both locales before merging.
+3. Read via `getDictionary(locale).<feature>.<key>` in any component.
+4. Fill both locales before merging — no `es → en` fallback for shipped pages.
+
+## Routing & links
+
+- Build URLs via `localeUrl(locale, routeKey, ...args)` from [@lib/routes](../src/lib/routes.ts). Never hand-concatenate locale prefixes.
+- Use `next/link` `<Link>` for in-app navigation.
+- `usePathname` / `useRouter` from `next/navigation` work only in client components.
+
+## Images
+
+- Go through [@components/ui/ImageCustom](../src/components/ui/ImageCustom.tsx) for **every** image. It wraps `next/image` and routes the `src` through `resolveImageSrc`. Do not import `next/image` directly.
+- Local paths pass through unchanged. Remote URLs route through `/api/image-proxy?url=…` (when wired). Direct links to external hosts are not allowed.
+- Use `width`/`height` for fixed-size images (logo). Use `fill` + a real `sizes` hint for absolute-positioned/full-bleed images. Parent must be `position: relative`.
+
+## Icons
+
+- All icons go through [@components/ui/Icon](../src/components/ui/Icon.tsx) — a centralized registry around `lucide-react`. No inline SVG icons in components.
+- To add a new icon: import it in `Icon.tsx`, add it to the `ICONS` map, then use `<Icon name="…" />` at the call site.
+
+## Tests
+
+- Tests sit next to source (`foo.ts` → `foo.test.ts`).
+- Lint must pass with `--max-warnings=0`. Run `bun run lint` and `bun run build` before declaring a task done.
