@@ -5,8 +5,10 @@ interface Props {
   className?: string;
 }
 
-export default function Logo({ className }: Props) {
+const Logo: React.FC<Props> = ({ className }) => {
   return (
     <ImageCustom src="/logo.svg" alt="RockyPoint.net logo" width={48} height={120} className={cn(className)} priority />
   );
-}
+};
+
+export default Logo;

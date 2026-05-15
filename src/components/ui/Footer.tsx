@@ -1,7 +1,7 @@
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 
-export default function Footer() {
+const Footer: React.FC = () => {
   const t = useTranslations('footer');
   const year = new Date().getFullYear();
 
@@ -46,4 +46,6 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

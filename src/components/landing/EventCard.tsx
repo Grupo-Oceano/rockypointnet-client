@@ -1,6 +1,6 @@
+import { Link } from '@/i18n/navigation';
 import Icon from '@/src/components/ui/Icon';
 import ImageCustom from '@/src/components/ui/ImageCustom';
-import { Link } from '@/i18n/navigation';
 import { useFormatter, useTranslations } from 'next-intl';
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
   imageAlt: string;
 }
 
-export default function EventCard({ title, href, date, location, organizer, rating, image, imageAlt }: Props) {
+const EventCard: React.FC<Props> = ({ title, href, date, location, organizer, rating, image, imageAlt }) => {
   const t = useTranslations('events.card');
   const format = useFormatter();
 
@@ -31,7 +31,7 @@ export default function EventCard({ title, href, date, location, organizer, rati
 
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-sm transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-md">
-      <Link href={href} className="bg-emperor-200 relative block aspect-[4/3] overflow-hidden">
+      <Link href={href} className="bg-emperor-200 relative block aspect-4/3 overflow-hidden">
         <ImageCustom
           src={image}
           alt={imageAlt}
@@ -122,4 +122,6 @@ export default function EventCard({ title, href, date, location, organizer, rati
       </div>
     </article>
   );
-}
+};
+
+export default EventCard;

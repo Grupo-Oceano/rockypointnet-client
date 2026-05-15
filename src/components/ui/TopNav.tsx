@@ -8,7 +8,7 @@ import Icon, { type IconName } from './Icon';
 import LocaleSwitcher from './LocaleSwitcher';
 import Logo from './Logo';
 
-export default function TopNav() {
+const TopNav: React.FC = () => {
   const t = useTranslations('nav');
   const tCommon = useTranslations('common');
   const [open, setOpen] = useState(false);
@@ -49,11 +49,11 @@ export default function TopNav() {
       )}
     >
       <nav
-        className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 py-12 sm:px-6 lg:px-8"
+        className="mx-auto flex h-12 md:h-16 max-w-6xl items-center justify-between px-4 py-8 md:py-12 sm:px-6 lg:px-8"
         aria-label={t('primaryAria')}
       >
         <Link href="/" aria-label={tCommon('wordmarkAria')}>
-          <Logo className="w-32" />
+          <Logo className="w-24 md:w-32" />
         </Link>
 
         <ul className="hidden items-center gap-1 sm:flex sm:gap-6">
@@ -76,7 +76,7 @@ export default function TopNav() {
 
         <button
           type="button"
-          className="text-emperor-700 hover:bg-sand-100 hover:text-emperor-900 inline-flex items-center justify-center rounded-full p-2 transition-colors sm:hidden"
+          className="text-emperor-700 hover:bg-sand-100 hover:text-emperor-900 inline-flex items-center justify-center rounded-full p-2 transition-colors"
           aria-controls="topnav-mobile-panel"
           aria-expanded={open}
           aria-label={open ? t('closeMenuAria') : t('openMenuAria')}
@@ -107,4 +107,6 @@ export default function TopNav() {
       </div>
     </header>
   );
-}
+};
+
+export default TopNav;

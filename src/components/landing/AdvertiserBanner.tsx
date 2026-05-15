@@ -3,7 +3,7 @@ import ImageCustom from '@/src/components/ui/ImageCustom';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 
-export default function AdvertiserBanner() {
+const AdvertiserBanner: React.FC = () => {
   const t = useTranslations('advertiser');
 
   return (
@@ -42,4 +42,6 @@ export default function AdvertiserBanner() {
       </div>
     </section>
   );
-}
+};
+
+export default AdvertiserBanner;

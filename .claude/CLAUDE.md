@@ -46,6 +46,20 @@ Default to **Server Components** (RSC). Mark `"use client"` only when the file n
 
 Push `"use client"` to the smallest leaf possible — a single interactive control or section, not a whole page. Server components can render client components freely; the inverse requires `children` prop.
 
+When defining components, our convention is to use a typed props interface and a default export. For example:
+
+```tsx
+interface Props {
+  exampleProp: string;
+}
+
+const ExampleComponent: React.FC<Props> = ({ exampleProp }) => {
+  return <div>{exampleProp}</div>;
+};
+
+export default ExampleComponent;
+```
+
 Notes that **do not** apply here (carryover from the Astro+Qwik version of this app):
 
 - There is no Qwik-style serialization constraint. Dictionary entries can be functions (`(year) => \`© ${year}\``) and used freely in RSC or client components.

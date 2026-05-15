@@ -9,7 +9,7 @@ interface Props {
   className?: string;
 }
 
-export default function LocaleSwitcher({ className }: Props) {
+const LocaleSwitcher: React.FC<Props> = ({ className }) => {
   const t = useTranslations('common');
   const pathname = usePathname();
   const activeLocale = useLocale() as Locale;
@@ -58,6 +58,8 @@ export default function LocaleSwitcher({ className }: Props) {
       </div>
     </div>
   );
-}
+};
+
+export default LocaleSwitcher;
 
 void routing;

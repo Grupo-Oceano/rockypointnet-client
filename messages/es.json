@@ -158,5 +158,170 @@
   },
   "signUp": {
     "title": "Regístrate"
+  },
+  "manage": {
+    "admin": {
+      "badge": "Panel de admin",
+      "title": "Centro de control administrativo",
+      "description": "Este shell está conectado como entrada del panel de administración. Los elementos del sidebar y las tarjetas resumen se mantienen estáticos por ahora para que luego conectes datos y rutas reales sin rehacer el marco.",
+      "navigationTitle": "Navegación de admin",
+      "footerNote": "Mantén este layout como el shell compartido de admin; después puedes reemplazar los elementos de ejemplo por datos reales de rutas o secciones con permisos.",
+      "navigation": {
+        "overview": {
+          "label": "Resumen",
+          "description": "Un punto de partida para métricas, aprobaciones y salud del sistema."
+        },
+        "reports": {
+          "label": "Reportes",
+          "description": "Espacio temporal para reportes de rendimiento y exportaciones."
+        },
+        "properties": {
+          "label": "Propiedades",
+          "description": "Reserva esto para inventario, contenido y datos de ubicación."
+        },
+        "users": {
+          "label": "Usuarios",
+          "description": "La gestión de miembros y accesos vivirá aquí."
+        },
+        "documents": {
+          "label": "Documentos",
+          "description": "Útil para políticas, archivos de auditoría y documentos compartidos."
+        }
+      },
+      "stats": {
+        "pendingReviews": {
+          "label": "Revisiones pendientes",
+          "value": "12",
+          "detail": "Elementos esperando aprobación administrativa."
+        },
+        "openIssues": {
+          "label": "Incidencias abiertas",
+          "value": "3",
+          "detail": "Tareas ligeras que requieren atención hoy."
+        },
+        "coverage": {
+          "label": "Cobertura",
+          "value": "98%",
+          "detail": "Cobertura operativa actual en el espacio de trabajo."
+        }
+      },
+      "page": {
+        "hero": {
+          "kicker": "Espacio de admin",
+          "title": "Listo para herramientas administrativas",
+          "body": "El layout ya está montado. Ahora puedes conectar las fuentes de datos reales, las secciones del sidebar basadas en rutas y cualquier permiso específico de admin sin cambiar el marco externo."
+        },
+        "highlights": {
+          "activity": {
+            "title": "Flujo de actividad",
+            "body": "Usa este bloque para aprobaciones, alertas y las acciones más recientes del admin cuando los datos estén listos."
+          },
+          "quickChecks": {
+            "title": "Revisiones rápidas",
+            "body": "Puede convertirse en el lugar para estados, bloqueos y recordatorios operativos visibles de inmediato."
+          },
+          "summary": {
+            "title": "Resumen operativo",
+            "body": "La cuadrícula de tarjetas inferior le da al panel de admin un área de contenido real para que la ruta quede lista de inmediato."
+          }
+        },
+        "cards": {
+          "approvals": {
+            "label": "Aprobaciones pendientes",
+            "value": "12 elementos",
+            "detail": "El rail izquierdo puede llevar esto a rutas dedicadas o filtros después."
+          },
+          "sync": {
+            "label": "Sincronización de datos",
+            "value": "Saludable",
+            "detail": "Cámbialo por un estado en vivo cuando el backend esté conectado."
+          }
+        }
+      }
+    },
+    "business": {
+      "badge": "Panel de negocio",
+      "title": "Centro de operaciones del negocio",
+      "description": "Este shell está reservado para la parte de negocio de la app. Mantiene la misma estructura que admin para que ambas áreas se sientan consistentes mientras conectas las rutas reales del sidebar más adelante.",
+      "navigationTitle": "Navegación de negocio",
+      "footerNote": "Esto es estático por ahora. Cuando agregues datos del negocio, reemplaza estas secciones temporales por vistas basadas en rutas y permisos si hace falta.",
+      "navigation": {
+        "overview": {
+          "label": "Resumen",
+          "description": "Una zona de inicio breve para estado del negocio y próximos pasos."
+        },
+        "reservations": {
+          "label": "Reservaciones",
+          "description": "Luego puede enrutar a disponibilidad y datos de reservas."
+        },
+        "billing": {
+          "label": "Facturación",
+          "description": "Úsalo para facturas, estado de pagos y conciliación."
+        },
+        "team": {
+          "label": "Equipo",
+          "description": "Reserva esta sección para gestión de personal y roles."
+        },
+        "assets": {
+          "label": "Activos",
+          "description": "Guarda aquí contenido de propiedades o marca cuando esté conectado."
+        }
+      },
+      "stats": {
+        "today": {
+          "label": "Hoy",
+          "value": "24",
+          "detail": "Reservas y solicitudes tocadas por el panel de negocio."
+        },
+        "revenue": {
+          "label": "Ingresos",
+          "value": "$18k",
+          "detail": "Un espacio temporal para resúmenes financieros y tendencias."
+        },
+        "actionItems": {
+          "label": "Acciones pendientes",
+          "value": "6",
+          "detail": "La lista corta de seguimientos para operadores y gerentes."
+        }
+      },
+      "page": {
+        "hero": {
+          "kicker": "Espacio de negocio",
+          "title": "Layout orientado a operaciones",
+          "body": "Esta ruta ya tiene un shell completo. Puedes conectar datos de negocio, filtros y destinos del sidebar sin rediseñar el contenedor exterior."
+        },
+        "widgets": {
+          "operations": {
+            "title": "Resumen operativo",
+            "body": "Este es el carril principal para dashboards de negocio, calendarios y números accionables."
+          },
+          "customerFlow": {
+            "title": "Flujo de clientes",
+            "body": "Más adelante puedes usar esta zona para métricas de conversión, reservas y disparadores al cliente."
+          },
+          "staffQueue": {
+            "title": "Cola del equipo",
+            "body": "La ruta ya existe, así que el equipo de negocio puede llegar a un workspace completamente enrutado luego."
+          }
+        },
+        "cards": {
+          "reservations": {
+            "label": "Reservas de hoy",
+            "value": "14",
+            "detail": "Un espacio temporal para la carga real de reservas."
+          },
+          "occupancy": {
+            "label": "Ocupación",
+            "value": "81%",
+            "detail": "Cámbialo por la tarjeta de ocupación del negocio más adelante."
+          },
+          "payouts": {
+            "label": "Pagos pendientes",
+            "value": "4",
+            "detail": "Un bloque limpio para pendientes financieros."
+          }
+        }
+      }
+    }
   }
 }

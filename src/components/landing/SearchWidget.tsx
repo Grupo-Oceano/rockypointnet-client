@@ -1,15 +1,18 @@
 'use client';
 
+import Counter from '@/src/components/ui/forms/Counter';
+import Field from '@/src/components/ui/forms/Field';
 import Icon from '@/src/components/ui/Icon';
 import { cn } from '@/src/lib/utils';
 import { useTranslations } from 'next-intl';
-import { useState, type ReactNode } from 'react';
+import Form from 'next/form';
+import { useState } from 'react';
 
 type TabId = 'hotels' | 'restaurants' | 'attractions' | 'events';
 
 const todayIso = () => new Date().toISOString().slice(0, 10);
 
-export default function SearchWidget() {
+const SearchWidget: React.FC = () => {
   const t = useTranslations('search');
 
   const tabs: { id: TabId; label: string }[] = [
@@ -32,7 +35,7 @@ export default function SearchWidget() {
   };
 
   return (
-    <section className="relative z-20 mx-auto w-full max-w-5xl px-4 sm:px-12 md:px-18" aria-label={t('sectionAria')}>
+    <section className="relative z-20 mx-auto w-full max-w-5xl px-4 md:px-24 lg:px-18" aria-label={t('sectionAria')}>
       <div className="-mt-8 rounded-2xl bg-white p-4 shadow-lg sm:p-6 md:-mt-12 md:p-8">
         <div role="tablist" aria-label={t('tabsAria')} className="mb-5 flex flex-wrap gap-1 sm:gap-2">
           {tabs.map((tab) => {
@@ -57,8 +60,8 @@ export default function SearchWidget() {
           })}
         </div>
 
-        <form
-          onSubmit={(e) => e.preventDefault()}
+        <Form
+          action={`/search/${activeTab}`}
           className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-[1.1fr_1.1fr_0.8fr_0.8fr_0.8fr_auto] lg:items-end"
         >
           <Field label={t('fields.arrival')}>
@@ -137,61 +140,10 @@ export default function SearchWidget() {
               {t('submit')}
             </button>
           </div>
-        </form>
+        </Form>
       </div>
     </section>
   );
-}
+};
 
-function Field({ label, children }: { label: string; children: ReactNode }) {
-  return (
-    <label className="flex flex-col gap-1">
-      <span className="text-emperor-500 text-xs font-medium tracking-wide uppercase">{label}</span>
-      <span className="border-sand-300 focus-within:border-ocean-600 flex items-center gap-2 border-b pb-1.5">
-        {children}
-      </span>
-    </label>
-  );
-}
-
-interface CounterProps {
-  label: string;
-  value: number;
-  min: number;
-  max: number;
-  decrementAria: string;
-  incrementAria: string;
-  onDec: () => void;
-  onInc: () => void;
-}
-
-function Counter({ label, value, min, max, decrementAria, incrementAria, onDec, onInc }: CounterProps) {
-  return (
-    <div className="flex flex-col gap-1">
-      <span className="text-emperor-500 text-xs font-medium tracking-wide uppercase">{label}</span>
-      <div className="border-sand-300 flex items-center justify-between border-b pb-1.5">
-        <button
-          type="button"
-          aria-label={decrementAria}
-          onClick={onDec}
-          disabled={value <= min}
-          className="border-sand-300 text-emperor-600 hover:border-ocean-600 hover:text-ocean-600 grid size-7 place-items-center rounded-full border transition-colors disabled:cursor-not-allowed disabled:opacity-40"
-        >
-          <Icon name="Minus" className="size-3.5" strokeWidth={1.5} aria-hidden="true" />
-        </button>
-        <span aria-live="polite" className="text-emperor-800 min-w-6 text-center text-sm font-semibold">
-          {value}
-        </span>
-        <button
-          type="button"
-          aria-label={incrementAria}
-          onClick={onInc}
-          disabled={value >= max}
-          className="border-sand-300 text-emperor-600 hover:border-ocean-600 hover:text-ocean-600 grid size-7 place-items-center rounded-full border transition-colors disabled:cursor-not-allowed disabled:opacity-40"
-        >
-          <Icon name="Plus" className="size-3.5" strokeWidth={1.5} aria-hidden="true" />
-        </button>
-      </div>
-    </div>
-  );
-}
+export default SearchWidget;

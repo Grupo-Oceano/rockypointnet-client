@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 
 const AUTO_ADVANCE_MS = 5000;
 
-export default function PartnersSlideshow() {
+const PartnersSlideshow: React.FC = () => {
   const t = useTranslations('hero');
 
   const partners = [
@@ -99,12 +99,12 @@ export default function PartnersSlideshow() {
     >
       <div
         ref={trackRef}
-        className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-[7.5vw] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="flex snap-x snap-mandatory md:gap-4 overflow-x-auto scroll-smooth md:px-[7.5vw] [-ms-overflow-style:none] scrollbar-none [&::-webkit-scrollbar]:hidden"
       >
         {partners.map((p, i) => (
           <div
             key={i}
-            className={`relative h-90 w-[85vw] shrink-0 snap-center overflow-hidden rounded-3xl sm:h-105 md:h-120 ${p.color}`}
+            className={`relative h-90 w-full md:w-[85vw] shrink-0 snap-center overflow-hidden md:rounded-3xl sm:h-105 md:h-120 ${p.color}`}
           >
             <ImageCustom
               src={p.src}
@@ -131,7 +131,7 @@ export default function PartnersSlideshow() {
         type="button"
         aria-label={t('previousAria')}
         onClick={() => scrollToIndex(current - 1)}
-        className="absolute top-1/2 left-4 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-gray-800 opacity-0 shadow transition-opacity ease-in-out group-hover:opacity-100 hover:bg-white sm:left-8"
+        className="hidden absolute top-1/2 z-10 md:flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-gray-800 opacity-0 shadow transition-opacity ease-in-out group-hover:opacity-100 hover:bg-white md:left-1.5 lg:left-4 xl:left-6"
       >
         <Icon name="ChevronLeft" className="size-5" strokeWidth={2} aria-hidden="true" />
       </button>
@@ -139,7 +139,7 @@ export default function PartnersSlideshow() {
         type="button"
         aria-label={t('nextAria')}
         onClick={() => scrollToIndex(current + 1)}
-        className="absolute top-1/2 right-4 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-gray-800 opacity-0 shadow transition-opacity ease-in-out group-hover:opacity-100 hover:bg-white sm:right-8"
+        className="hidden absolute top-1/2 z-10 md:flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-gray-800 opacity-0 shadow transition-opacity ease-in-out group-hover:opacity-100 hover:bg-white md:right-1.5 lg:right-4 xl:right-6"
       >
         <Icon name="ChevronRight" className="size-5" strokeWidth={2} aria-hidden="true" />
       </button>
@@ -157,4 +157,6 @@ export default function PartnersSlideshow() {
       </div>
     </div>
   );
-}
+};
+
+export default PartnersSlideshow;

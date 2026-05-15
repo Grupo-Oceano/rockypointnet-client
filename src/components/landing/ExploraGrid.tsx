@@ -1,5 +1,5 @@
-import ImageCustom from '@/src/components/ui/ImageCustom';
 import { Link } from '@/i18n/navigation';
+import ImageCustom from '@/src/components/ui/ImageCustom';
 import { useTranslations } from 'next-intl';
 
 interface Place {
@@ -10,7 +10,7 @@ interface Place {
   alt: string;
 }
 
-export default function ExploraGrid() {
+const ExploraGrid: React.FC = () => {
   const t = useTranslations('explora');
   const tag = t('restaurantTag');
 
@@ -56,7 +56,7 @@ export default function ExploraGrid() {
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <Link
           href={tall.href}
-          className="group bg-emperor-200 relative block aspect-[4/5] overflow-hidden rounded-2xl shadow-sm md:row-span-2 md:aspect-auto"
+          className="group bg-emperor-200 relative block aspect-4/5 overflow-hidden rounded-2xl shadow-sm md:row-span-2 md:aspect-auto"
         >
           <ImageCustom
             src={tall.src}
@@ -74,7 +74,7 @@ export default function ExploraGrid() {
 
         <Link
           href={wide.href}
-          className="group bg-emperor-200 relative block aspect-[5/3] overflow-hidden rounded-2xl shadow-sm"
+          className="group bg-emperor-200 relative block aspect-5/3 overflow-hidden rounded-2xl shadow-sm"
         >
           <ImageCustom
             src={wide.src}
@@ -95,7 +95,7 @@ export default function ExploraGrid() {
             <Link
               key={p.href}
               href={p.href}
-              className="group bg-emperor-200 relative block aspect-[5/3] overflow-hidden rounded-2xl shadow-sm"
+              className="group bg-emperor-200 relative block aspect-5/3 overflow-hidden rounded-2xl shadow-sm"
             >
               <ImageCustom
                 src={p.src}
@@ -115,4 +115,6 @@ export default function ExploraGrid() {
       </div>
     </section>
   );
-}
+};
+
+export default ExploraGrid;

@@ -3,7 +3,7 @@ import ImageCustom from '@/src/components/ui/ImageCustom';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 
-export default function FinalCTA() {
+const FinalCTA: React.FC = () => {
   const t = useTranslations('finalCta');
 
   return (
@@ -48,4 +48,6 @@ export default function FinalCTA() {
       </div>
     </section>
   );
-}
+};
+
+export default FinalCTA;

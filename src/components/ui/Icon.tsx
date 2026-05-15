@@ -47,7 +47,9 @@ interface Props extends LucideProps {
   name: IconName;
 }
 
-export default function Icon({ name, ...rest }: Props) {
+const Icon: React.FC<Props> = ({ name, ...rest }) => {
   const Component = ICONS[name];
   return <Component {...rest} />;
-}
+};
+
+export default Icon;

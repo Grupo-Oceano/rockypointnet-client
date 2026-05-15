@@ -5,7 +5,25 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
-  // Override default ignores of eslint-config-next.
+  {
+    files: ["src/**/*.{ts,tsx}"],
+    rules: {
+      // Components must be arrow functions (matches the
+      // `const X: React.FC<Props> = (...) => {...}` convention).
+      "react/function-component-definition": [
+        "error",
+        {
+          namedComponents: "arrow-function",
+          unnamedComponents: "arrow-function",
+        },
+      ],
+      // Props/typed shapes must be declared with `interface`.
+      "@typescript-eslint/consistent-type-definitions": [
+        "error",
+        "interface",
+      ],
+    },
+  },
   globalIgnores([
     // Default ignores of eslint-config-next:
     ".next/**",

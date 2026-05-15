@@ -4,7 +4,7 @@ import { Link } from '@/i18n/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import EventCard from './EventCard';
 
-export default function EventsSection() {
+const EventsSection: React.FC = () => {
   const t = useTranslations('events');
   const locale = useLocale();
   const dateFormatter = new Intl.DateTimeFormat(locale, {
@@ -96,4 +96,6 @@ export default function EventsSection() {
       </div>
     </section>
   );
-}
+};
+
+export default EventsSection;
