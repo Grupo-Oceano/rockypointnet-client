@@ -1,0 +1,327 @@
+{
+  "meta": {
+    "siteName": "RockyPoint.net",
+    "siteTitle": "RockyPoint.net — Comienza tu aventura en Rocky Point",
+    "siteDescription": "Hoteles, restaurantes, atracciones y eventos en Puerto Peñasco. Reserva y descubre lo mejor de Rocky Point."
+  },
+  "home": {
+    "metaTitle": "Comienza tu aventura en Rocky Point",
+    "metaDescription": "Hoteles, restaurantes, atracciones y eventos en Puerto Peñasco. Reserva y descubre lo mejor de Rocky Point."
+  },
+  "common": {
+    "wordmarkAria": "RockyPoint.net inicio",
+    "languageMenuLabel": "Idioma",
+    "spanishLabel": "Español",
+    "englishLabel": "English",
+    "switchToSpanishAria": "Cambiar a español",
+    "switchToEnglishAria": "Cambiar a inglés"
+  },
+  "nav": {
+    "primaryAria": "Navegación principal",
+    "openMenuAria": "Abrir menú de navegación",
+    "closeMenuAria": "Cerrar menú de navegación",
+    "items": {
+      "hotels": "Hoteles",
+      "restaurants": "Restaurantes",
+      "activities": "Actividades",
+      "attractions": "Atracciones",
+      "events": "Eventos"
+    }
+  },
+  "footer": {
+    "copyright": "© {year} RockyPoint.net",
+    "primary": {
+      "privacy": "Privacidad",
+      "terms": "Términos de uso",
+      "preferences": "Preferencias"
+    },
+    "secondary": {
+      "suggestRestaurant": "Sugerir un restaurante",
+      "advertise": "Anuncia tu negocio",
+      "about": "Acerca de",
+      "contact": "Contacto"
+    }
+  },
+  "hero": {
+    "carouselAria": "Carrusel de Rocky Point",
+    "slides": {
+      "welcome": "Comienza tu aventura en Rocky Point"
+    },
+    "previousAria": "Diapositiva anterior",
+    "nextAria": "Diapositiva siguiente",
+    "goToAria": "Ir a la diapositiva {number}"
+  },
+  "explora": {
+    "heading": "Explora los mejores lugares en Rocky Point",
+    "restaurantTag": "Restaurante",
+    "places": {
+      "elMexicano": {
+        "name": "El Mexicano",
+        "alt": "Interior cálido del restaurante El Mexicano"
+      },
+      "theFishMarket": {
+        "name": "The Fish Market",
+        "alt": "Vista del restaurante The Fish Market"
+      },
+      "palapaAntigua": {
+        "name": "Palapa Antigua",
+        "alt": "Palapa Antigua al atardecer"
+      },
+      "elMiradorDelSur": {
+        "name": "El Mirador del Sur",
+        "alt": "Vista panorámica desde El Mirador del Sur"
+      }
+    }
+  },
+  "advertiser": {
+    "sectionAria": "Espacio publicitario",
+    "title": "¿Tienes un negocio?",
+    "subtitle": "Y te gustaría aparecer aquí",
+    "cta": "Anúnciate con nosotros",
+    "placeholder": "[Banner publicitario]"
+  },
+  "events": {
+    "headingLine1": "Disfruta de eventos únicos en",
+    "headingLine2": "Rocky Point",
+    "subheading": "Rocky Point es el lugar ideal para realizar actividades al aire libre y descubrir festivales todo el año.",
+    "seeAll": "Ver todos los eventos",
+    "list": {
+      "beachGathering": {
+        "title": "Beach Gathering en Playa Hermosa",
+        "imageAlt": "Reunión nocturna en la playa"
+      },
+      "seafoodFestival": {
+        "title": "Festival de Mariscos del Mar de Cortés",
+        "imageAlt": "Visitantes en festival de mariscos"
+      },
+      "communityEvents": {
+        "title": "Community Events del Centro",
+        "imageAlt": "Evento comunitario al aire libre"
+      },
+      "kayakSunset": {
+        "title": "Kayak Sunset Tour",
+        "imageAlt": "Kayak al atardecer en el mar"
+      }
+    },
+    "sharedLocation": "Rocky Point Main Beach",
+    "sharedOrganizer": "RockyPoint Beach Fanatics",
+    "card": {
+      "dateLabel": "Fecha",
+      "placeLabel": "Lugar",
+      "organizerLabel": "Organizador",
+      "byOrganizer": "por {name}",
+      "ratingSuffix": "Rating",
+      "ratingAria": "{rating} de 5",
+      "shareAria": "Compartir {title}",
+      "favoriteAria": "Guardar {title} en favoritos"
+    }
+  },
+  "finalCta": {
+    "titleLine1": "¿Listo para vivir",
+    "titleLine2": "Rocky Point?",
+    "description": "Desde un picnic en la playa hasta un paseo en yate, Rocky Point tiene todo para disfrutar un fin de semana o una estadía larga.",
+    "cta": "Reserva ahora",
+    "familyImageAlt": "Familia disfrutando un picnic en la playa de Rocky Point",
+    "friendsImageAlt": "Amigos brindando en un yate al atardecer"
+  },
+  "search": {
+    "sectionAria": "Búsqueda de Rocky Point",
+    "tabsAria": "Categorías de búsqueda",
+    "tabs": {
+      "hotels": "Hoteles",
+      "restaurants": "Restaurantes",
+      "activities": "Actividades",
+      "attractions": "Atracciones",
+      "events": "Eventos"
+    },
+    "fields": {
+      "arrival": "Llegada",
+      "arrivalAria": "Fecha de llegada",
+      "departure": "Salida",
+      "departureAria": "Fecha de salida",
+      "rooms": "Habitaciones",
+      "adults": "Adultos",
+      "children": "Niños"
+    },
+    "submit": "Buscar",
+    "decrementAria": "Disminuir {label}",
+    "incrementAria": "Aumentar {label}"
+  },
+  "login": {
+    "title": "Bienvenido de nuevo",
+    "subtitle": "Inicia sesión para administrar tus reservas y preferencias.",
+    "emailLabel": "Correo electrónico",
+    "passwordLabel": "Contraseña",
+    "submit": "Iniciar sesión",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "signUpPrompt": "¿No tienes cuenta? Regístrate"
+  },
+  "signUp": {
+    "title": "Regístrate"
+  },
+  "manage": {
+    "admin": {
+      "badge": "Panel de admin",
+      "title": "Centro de control administrativo",
+      "description": "Este shell está conectado como entrada del panel de administración. Los elementos del sidebar y las tarjetas resumen se mantienen estáticos por ahora para que luego conectes datos y rutas reales sin rehacer el marco.",
+      "navigationTitle": "Navegación de admin",
+      "footerNote": "Mantén este layout como el shell compartido de admin; después puedes reemplazar los elementos de ejemplo por datos reales de rutas o secciones con permisos.",
+      "navigation": {
+        "overview": {
+          "label": "Resumen",
+          "description": "Un punto de partida para métricas, aprobaciones y salud del sistema."
+        },
+        "reports": {
+          "label": "Reportes",
+          "description": "Espacio temporal para reportes de rendimiento y exportaciones."
+        },
+        "properties": {
+          "label": "Propiedades",
+          "description": "Reserva esto para inventario, contenido y datos de ubicación."
+        },
+        "users": {
+          "label": "Usuarios",
+          "description": "La gestión de miembros y accesos vivirá aquí."
+        },
+        "documents": {
+          "label": "Documentos",
+          "description": "Útil para políticas, archivos de auditoría y documentos compartidos."
+        }
+      },
+      "stats": {
+        "pendingReviews": {
+          "label": "Revisiones pendientes",
+          "value": "12",
+          "detail": "Elementos esperando aprobación administrativa."
+        },
+        "openIssues": {
+          "label": "Incidencias abiertas",
+          "value": "3",
+          "detail": "Tareas ligeras que requieren atención hoy."
+        },
+        "coverage": {
+          "label": "Cobertura",
+          "value": "98%",
+          "detail": "Cobertura operativa actual en el espacio de trabajo."
+        }
+      },
+      "page": {
+        "hero": {
+          "kicker": "Espacio de admin",
+          "title": "Listo para herramientas administrativas",
+          "body": "El layout ya está montado. Ahora puedes conectar las fuentes de datos reales, las secciones del sidebar basadas en rutas y cualquier permiso específico de admin sin cambiar el marco externo."
+        },
+        "highlights": {
+          "activity": {
+            "title": "Flujo de actividad",
+            "body": "Usa este bloque para aprobaciones, alertas y las acciones más recientes del admin cuando los datos estén listos."
+          },
+          "quickChecks": {
+            "title": "Revisiones rápidas",
+            "body": "Puede convertirse en el lugar para estados, bloqueos y recordatorios operativos visibles de inmediato."
+          },
+          "summary": {
+            "title": "Resumen operativo",
+            "body": "La cuadrícula de tarjetas inferior le da al panel de admin un área de contenido real para que la ruta quede lista de inmediato."
+          }
+        },
+        "cards": {
+          "approvals": {
+            "label": "Aprobaciones pendientes",
+            "value": "12 elementos",
+            "detail": "El rail izquierdo puede llevar esto a rutas dedicadas o filtros después."
+          },
+          "sync": {
+            "label": "Sincronización de datos",
+            "value": "Saludable",
+            "detail": "Cámbialo por un estado en vivo cuando el backend esté conectado."
+          }
+        }
+      }
+    },
+    "business": {
+      "badge": "Panel de negocio",
+      "title": "Centro de operaciones del negocio",
+      "description": "Este shell está reservado para la parte de negocio de la app. Mantiene la misma estructura que admin para que ambas áreas se sientan consistentes mientras conectas las rutas reales del sidebar más adelante.",
+      "navigationTitle": "Navegación de negocio",
+      "footerNote": "Esto es estático por ahora. Cuando agregues datos del negocio, reemplaza estas secciones temporales por vistas basadas en rutas y permisos si hace falta.",
+      "navigation": {
+        "overview": {
+          "label": "Resumen",
+          "description": "Una zona de inicio breve para estado del negocio y próximos pasos."
+        },
+        "reservations": {
+          "label": "Reservaciones",
+          "description": "Luego puede enrutar a disponibilidad y datos de reservas."
+        },
+        "billing": {
+          "label": "Facturación",
+          "description": "Úsalo para facturas, estado de pagos y conciliación."
+        },
+        "team": {
+          "label": "Equipo",
+          "description": "Reserva esta sección para gestión de personal y roles."
+        },
+        "assets": {
+          "label": "Activos",
+          "description": "Guarda aquí contenido de propiedades o marca cuando esté conectado."
+        }
+      },
+      "stats": {
+        "today": {
+          "label": "Hoy",
+          "value": "24",
+          "detail": "Reservas y solicitudes tocadas por el panel de negocio."
+        },
+        "revenue": {
+          "label": "Ingresos",
+          "value": "$18k",
+          "detail": "Un espacio temporal para resúmenes financieros y tendencias."
+        },
+        "actionItems": {
+          "label": "Acciones pendientes",
+          "value": "6",
+          "detail": "La lista corta de seguimientos para operadores y gerentes."
+        }
+      },
+      "page": {
+        "hero": {
+          "kicker": "Espacio de negocio",
+          "title": "Layout orientado a operaciones",
+          "body": "Esta ruta ya tiene un shell completo. Puedes conectar datos de negocio, filtros y destinos del sidebar sin rediseñar el contenedor exterior."
+        },
+        "widgets": {
+          "operations": {
+            "title": "Resumen operativo",
+            "body": "Este es el carril principal para dashboards de negocio, calendarios y números accionables."
+          },
+          "customerFlow": {
+            "title": "Flujo de clientes",
+            "body": "Más adelante puedes usar esta zona para métricas de conversión, reservas y disparadores al cliente."
+          },
+          "staffQueue": {
+            "title": "Cola del equipo",
+            "body": "La ruta ya existe, así que el equipo de negocio puede llegar a un workspace completamente enrutado luego."
+          }
+        },
+        "cards": {
+          "reservations": {
+            "label": "Reservas de hoy",
+            "value": "14",
+            "detail": "Un espacio temporal para la carga real de reservas."
+          },
+          "occupancy": {
+            "label": "Ocupación",
+            "value": "81%",
+            "detail": "Cámbialo por la tarjeta de ocupación del negocio más adelante."
+          },
+          "payouts": {
+            "label": "Pagos pendientes",
+            "value": "4",
+            "detail": "Un bloque limpio para pendientes financieros."
+          }
+        }
+      }
+    }
+  }
+}

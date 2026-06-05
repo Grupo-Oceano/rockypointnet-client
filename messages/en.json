@@ -1,0 +1,327 @@
+{
+  "meta": {
+    "siteName": "RockyPoint.net",
+    "siteTitle": "RockyPoint.net — Start your Rocky Point adventure",
+    "siteDescription": "Hotels, restaurants, attractions, and events in Puerto Peñasco. Book and discover the best of Rocky Point."
+  },
+  "home": {
+    "metaTitle": "Start your Rocky Point adventure",
+    "metaDescription": "Hotels, restaurants, attractions, and events in Puerto Peñasco. Book and discover the best of Rocky Point."
+  },
+  "common": {
+    "wordmarkAria": "RockyPoint.net home",
+    "languageMenuLabel": "Language",
+    "spanishLabel": "Español",
+    "englishLabel": "English",
+    "switchToSpanishAria": "Switch to Spanish",
+    "switchToEnglishAria": "Switch to English"
+  },
+  "nav": {
+    "primaryAria": "Primary navigation",
+    "openMenuAria": "Open navigation menu",
+    "closeMenuAria": "Close navigation menu",
+    "items": {
+      "hotels": "Hotels",
+      "restaurants": "Restaurants",
+      "activities": "Activities",
+      "attractions": "Attractions",
+      "events": "Events"
+    }
+  },
+  "footer": {
+    "copyright": "© {year} RockyPoint.net",
+    "primary": {
+      "privacy": "Privacy",
+      "terms": "Terms of use",
+      "preferences": "Preferences"
+    },
+    "secondary": {
+      "suggestRestaurant": "Suggest a restaurant",
+      "advertise": "Advertise your business",
+      "about": "About",
+      "contact": "Contact"
+    }
+  },
+  "hero": {
+    "carouselAria": "Rocky Point carousel",
+    "slides": {
+      "welcome": "Start your Rocky Point adventure"
+    },
+    "previousAria": "Previous slide",
+    "nextAria": "Next slide",
+    "goToAria": "Go to slide {number}"
+  },
+  "explora": {
+    "heading": "Explore the best places in Rocky Point",
+    "restaurantTag": "Restaurant",
+    "places": {
+      "elMexicano": {
+        "name": "El Mexicano",
+        "alt": "Warm interior of El Mexicano restaurant"
+      },
+      "theFishMarket": {
+        "name": "The Fish Market",
+        "alt": "View of The Fish Market restaurant"
+      },
+      "palapaAntigua": {
+        "name": "Palapa Antigua",
+        "alt": "Palapa Antigua at sunset"
+      },
+      "elMiradorDelSur": {
+        "name": "El Mirador del Sur",
+        "alt": "Panoramic view from El Mirador del Sur"
+      }
+    }
+  },
+  "advertiser": {
+    "sectionAria": "Advertising space",
+    "title": "Have a business?",
+    "subtitle": "And want to be featured here",
+    "cta": "Advertise with us",
+    "placeholder": "[Ad banner]"
+  },
+  "events": {
+    "headingLine1": "Enjoy unique events in",
+    "headingLine2": "Rocky Point",
+    "subheading": "Rocky Point is the perfect place for outdoor activities and festivals all year long.",
+    "seeAll": "See all events",
+    "list": {
+      "beachGathering": {
+        "title": "Beach Gathering at Playa Hermosa",
+        "imageAlt": "Nighttime beach gathering"
+      },
+      "seafoodFestival": {
+        "title": "Sea of Cortez Seafood Festival",
+        "imageAlt": "Visitors at a seafood festival"
+      },
+      "communityEvents": {
+        "title": "Downtown Community Events",
+        "imageAlt": "Outdoor community event"
+      },
+      "kayakSunset": {
+        "title": "Kayak Sunset Tour",
+        "imageAlt": "Kayaking at sunset on the sea"
+      }
+    },
+    "sharedLocation": "Rocky Point Main Beach",
+    "sharedOrganizer": "RockyPoint Beach Fanatics",
+    "card": {
+      "dateLabel": "Date",
+      "placeLabel": "Place",
+      "organizerLabel": "Organizer",
+      "byOrganizer": "by {name}",
+      "ratingSuffix": "Rating",
+      "ratingAria": "{rating} out of 5",
+      "shareAria": "Share {title}",
+      "favoriteAria": "Save {title} to favorites"
+    }
+  },
+  "finalCta": {
+    "titleLine1": "Ready to live",
+    "titleLine2": "Rocky Point?",
+    "description": "From a beach picnic to a yacht cruise, Rocky Point has everything for a weekend or an extended stay.",
+    "cta": "Book now",
+    "familyImageAlt": "Family enjoying a picnic on a Rocky Point beach",
+    "friendsImageAlt": "Friends toasting on a yacht at sunset"
+  },
+  "search": {
+    "sectionAria": "Rocky Point search",
+    "tabsAria": "Search categories",
+    "tabs": {
+      "hotels": "Hotels",
+      "restaurants": "Restaurants",
+      "activities": "Activities",
+      "attractions": "Attractions",
+      "events": "Events"
+    },
+    "fields": {
+      "arrival": "Check-in",
+      "arrivalAria": "Check-in date",
+      "departure": "Check-out",
+      "departureAria": "Check-out date",
+      "rooms": "Rooms",
+      "adults": "Adults",
+      "children": "Children"
+    },
+    "submit": "Search",
+    "decrementAria": "Decrease {label}",
+    "incrementAria": "Increase {label}"
+  },
+  "login": {
+    "title": "Welcome back",
+    "subtitle": "Log in to your account to manage your bookings and preferences.",
+    "emailLabel": "Email address",
+    "passwordLabel": "Password",
+    "submit": "Log in",
+    "forgotPassword": "Forgot password?",
+    "signUpPrompt": "Don't have an account? Sign up"
+  },
+  "signUp": {
+    "title": "Sign up"
+  },
+  "manage": {
+    "admin": {
+      "badge": "Admin Panel",
+      "title": "Administrative control center",
+      "description": "This shell is wired as the admin entry point. The sidebar items and summary cards stay static for now so you can connect real data and routes later without reworking the frame.",
+      "navigationTitle": "Admin navigation",
+      "footerNote": "Keep this layout as the shared admin shell; later you can swap the placeholder nav items for real route data or permissions-aware sections.",
+      "navigation": {
+        "overview": {
+          "label": "Overview",
+          "description": "A launchpad for metrics, approvals, and system health."
+        },
+        "reports": {
+          "label": "Reports",
+          "description": "Placeholder for performance reports and exports."
+        },
+        "properties": {
+          "label": "Properties",
+          "description": "Reserve this for inventory, content, and location data."
+        },
+        "users": {
+          "label": "Users",
+          "description": "Member management and access control will live here."
+        },
+        "documents": {
+          "label": "Documents",
+          "description": "Useful for policies, audit files, and shared docs."
+        }
+      },
+      "stats": {
+        "pendingReviews": {
+          "label": "Pending reviews",
+          "value": "12",
+          "detail": "Items waiting on administrative approval."
+        },
+        "openIssues": {
+          "label": "Open issues",
+          "value": "3",
+          "detail": "Low-lift tasks that need attention today."
+        },
+        "coverage": {
+          "label": "Coverage",
+          "value": "98%",
+          "detail": "Current operational coverage across the workspace."
+        }
+      },
+      "page": {
+        "hero": {
+          "kicker": "Admin workspace",
+          "title": "Ready for admin tooling",
+          "body": "The layout is already in place. You can now connect the actual data sources, route-aware sidebar sections, and any admin-specific permissions without changing the surrounding frame."
+        },
+        "highlights": {
+          "activity": {
+            "title": "Activity stream",
+            "body": "Use this zone for approvals, alerts, and the latest admin actions once the data layer is ready."
+          },
+          "quickChecks": {
+            "title": "Quick checks",
+            "body": "This can become the place for status checks, blockers, and any operational reminders you want front and center."
+          },
+          "summary": {
+            "title": "Operational summary",
+            "body": "The card grid below gives the admin panel a real content area so the route is ready for immediate use."
+          }
+        },
+        "cards": {
+          "approvals": {
+            "label": "Pending approvals",
+            "value": "12 items",
+            "detail": "The left rail can later drive these into dedicated routes or filters."
+          },
+          "sync": {
+            "label": "Data sync",
+            "value": "Healthy",
+            "detail": "Swap this out for live integration status when the backend is connected."
+          }
+        }
+      }
+    },
+    "business": {
+      "badge": "Business Panel",
+      "title": "Business operations hub",
+      "description": "This shell is reserved for the business side of the app. It mirrors the admin structure so both areas feel consistent while you wire the real sidebar destinations later.",
+      "navigationTitle": "Business navigation",
+      "footerNote": "This is intentionally static for now. When you add your business data, replace the placeholder sections with route-aware views and permissions if needed.",
+      "navigation": {
+        "overview": {
+          "label": "Overview",
+          "description": "A concise landing zone for business-level status and next steps."
+        },
+        "reservations": {
+          "label": "Reservations",
+          "description": "This can later be routed to booking and availability data."
+        },
+        "billing": {
+          "label": "Billing",
+          "description": "Use this for invoices, payment status, and reconciliation."
+        },
+        "team": {
+          "label": "Team",
+          "description": "Reserve this section for staff management and roles."
+        },
+        "assets": {
+          "label": "Assets",
+          "description": "Keep property-level or brand-level content here once it is wired."
+        }
+      },
+      "stats": {
+        "today": {
+          "label": "Today",
+          "value": "24",
+          "detail": "Bookings and requests touched by the business panel."
+        },
+        "revenue": {
+          "label": "Revenue",
+          "value": "$18k",
+          "detail": "A placeholder slot for financial summaries and trend cards."
+        },
+        "actionItems": {
+          "label": "Action items",
+          "value": "6",
+          "detail": "The short list of follow-ups for operators and managers."
+        }
+      },
+      "page": {
+        "hero": {
+          "kicker": "Business workspace",
+          "title": "Operations-first layout",
+          "body": "This route now has a complete shell. You can plug in business-specific data, filters, and sidebar destinations without redesigning the surrounding chrome."
+        },
+        "widgets": {
+          "operations": {
+            "title": "Operations snapshot",
+            "body": "This is the main content lane for business dashboards, schedules, and actionable numbers."
+          },
+          "customerFlow": {
+            "title": "Customer flow",
+            "body": "Later you can use this area for conversion metrics, reservations, and customer-facing triggers."
+          },
+          "staffQueue": {
+            "title": "Staff queue",
+            "body": "The route is already present, so the business team can eventually land on a fully routed workspace."
+          }
+        },
+        "cards": {
+          "reservations": {
+            "label": "Reservations today",
+            "value": "14",
+            "detail": "A placeholder for the live booking load."
+          },
+          "occupancy": {
+            "label": "Occupancy",
+            "value": "81%",
+            "detail": "Swap this out for the business occupancy card later."
+          },
+          "payouts": {
+            "label": "Pending payouts",
+            "value": "4",
+            "detail": "A clean slot for financial follow-up items."
+          }
+        }
+      }
+    }
+  }
+}
